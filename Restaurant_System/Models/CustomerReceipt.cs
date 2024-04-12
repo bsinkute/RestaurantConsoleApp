@@ -2,12 +2,13 @@
 {
     public class CustomerReceipt : Receipt
     {
-        public string RestaurantName { get; private set; }
-
         public CustomerReceipt(int id, DateTime date, Order order, string restaurantName)
-            : base(id, date, order)
+            : base(id, date, order, restaurantName)
         {
-            RestaurantName = restaurantName;
+        }
+        public override string ToString()
+        {
+            return $" Id.: {Id}";
         }
     }
 }

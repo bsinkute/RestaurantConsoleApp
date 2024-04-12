@@ -12,5 +12,10 @@
             Name = name;
             Price = price;
         }
+
+        public override string ToString()
+        {
+            return $" Id.: {Id}";
+        }
     }
 }
