@@ -15,10 +15,6 @@
             Order = order;
             RestaurantName = restaurantName;
         }
-        public override string ToString()
-        {
-            return $"Id: {Id}";
-        }
 
         public decimal TotalAmountVatIncluded()
         {
@@ -32,22 +28,18 @@
 
         public decimal TotalAmountWithoutVat()
         {
-            decimal totalAmountWithoutVat = 0;
-            foreach (var item in Order.Items)
-            {
-                totalAmountWithoutVat += (item.Quantity * item.OrderedItem.Price) - VatRate;
-            }
-            return totalAmountWithoutVat;
+            return TotalAmountVatIncluded() - VatAmount();
         }
 
         public decimal VatAmount()
         {
-            decimal totalAmount = 0;
-            foreach (var item in Order.Items)
-            {
-                totalAmount += item.Quantity * item.OrderedItem.Price;
-            }
-            return totalAmount * VatRate;
+            return TotalAmountVatIncluded() * VatRate;
         }
+
+        public override string ToString()
+        {
+            return $"Id: {Id}";
+        }
+
     }
 }
