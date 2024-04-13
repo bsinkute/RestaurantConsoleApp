@@ -3,17 +3,17 @@
     public class Table
     {
         public int Id { get; set; }
-        int NumberOfSeat {  get; set; }
+        int NumberOfSeats {  get; set; }
 
         public Table(int id, int numberOfSeat)
         {
             Id = id;
-            NumberOfSeat = numberOfSeat;
+            NumberOfSeats = numberOfSeat;
         }
 
         public override string ToString()
         {
-            return $" Id.: {Id}";
+            return $"Id: {Id}, Number of seats: {NumberOfSeats}";
         }
     }
 }

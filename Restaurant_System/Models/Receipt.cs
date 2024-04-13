@@ -17,7 +17,7 @@
         }
         public override string ToString()
         {
-            return $" Id.: {Id}";
+            return $"Id: {Id}";
         }
 
         public decimal TotalAmountVatIncluded()
@@ -25,7 +25,7 @@
             decimal totalAmount = 0;
             foreach (var item in Order.Items)
             {
-                totalAmount += item.Quantity * item.OrderedProduct.Price;
+                totalAmount += item.Quantity * item.OrderedItem.Price;
             }
             return totalAmount;
         }
@@ -35,7 +35,7 @@
             decimal totalAmountWithoutVat = 0;
             foreach (var item in Order.Items)
             {
-                totalAmountWithoutVat += (item.Quantity * item.OrderedProduct.Price) - VatRate;
+                totalAmountWithoutVat += (item.Quantity * item.OrderedItem.Price) - VatRate;
             }
             return totalAmountWithoutVat;
         }
@@ -45,7 +45,7 @@
             decimal totalAmount = 0;
             foreach (var item in Order.Items)
             {
-                totalAmount += item.Quantity * item.OrderedProduct.Price;
+                totalAmount += item.Quantity * item.OrderedItem.Price;
             }
             return totalAmount * VatRate;
         }

@@ -11,20 +11,13 @@
 
         public override string ToString()
         {
-            return $" Id.:";
+            return string.Join("\r\n", menuItems.Select(item => item.ToString()));
         }
+
         public void AddMenuItem(int id, string name, decimal price)
         {
             MenuItem menuItem = new MenuItem(id, name, price);
             menuItems.Add(menuItem);
-        }
-
-        public void PrintMenu()
-        {
-            foreach (MenuItem menuItem in menuItems)
-            {
-                Console.WriteLine($"ID: {menuItem.Id}, Name: {menuItem.Name}, Price: {menuItem.Price}");
-            }
         }
     }
 }

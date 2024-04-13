@@ -21,7 +21,7 @@
 
         public override string ToString()
         {
-            return $"Reservation ID: {Id}, Date and Time: {ReservationDateTime}, People: {NumberOfPeople}, Customer: {CustomerName}, Contact: {ContactNumber}, Table ID: {TableId}";
+            return $"Reservation Id: {Id}, Date and Time: {ReservationDateTime}, People: {NumberOfPeople}, Customer: {CustomerName}, Contact: {ContactNumber}, Table Id: {TableId}";
         }
     }
 }

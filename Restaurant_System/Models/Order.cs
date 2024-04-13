@@ -23,7 +23,9 @@
 
         public override string ToString()
         {
-            return $" Id.: {Id}";
+            var idString = $"Id: {Id}\r\n";
+            var itemsString = string.Join("\r\n", Items.Select(x => x.ToString()));
+            return idString + itemsString;
         }
     }
 }

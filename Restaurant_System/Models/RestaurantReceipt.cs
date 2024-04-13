@@ -6,10 +6,5 @@
              : base(id, date, order, restaurantName)
         {
         }
-
-        public override string ToString()
-        {
-            return $" Id.: {Id}";
-        }
     }
 }

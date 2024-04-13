@@ -2,18 +2,18 @@
 {
     public class OrderItem
     {
-        public MenuItem OrderedProduct { get; set; }
+        public MenuItem OrderedItem { get; set; }
         public int Quantity { get; set; }
 
         public OrderItem(MenuItem product, int quantity)
         {
-            OrderedProduct = product;
+            OrderedItem = product;
             Quantity = quantity;
         }
 
         public override string ToString()
         {
-            return $" Id.: {Id}";
+            return $"{OrderedItem}, Quantity: {Quantity}";
         }
     }
 }
