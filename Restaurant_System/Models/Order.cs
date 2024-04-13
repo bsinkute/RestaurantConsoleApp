@@ -7,11 +7,10 @@
         public DateTime Checkin { get; set; }
         public DateTime Checkout { get; set; }
 
-        public Order(int id, DateTime checkin, DateTime checkout)
+        public Order(int id, DateTime checkin)
         {
             Id = id;
             Checkin = checkin;
-            Checkout = checkout;
             Items = new List<OrderItem>();
         }
 
@@ -19,6 +18,11 @@
         {
             var orderItem = new OrderItem(product, quantity);
             Items.Add(orderItem);
+        }
+
+        public void CheckoutOrder(DateTime checkoutDate) 
+        {
+            Checkout = checkoutDate;
         }
 
         public override string ToString()
