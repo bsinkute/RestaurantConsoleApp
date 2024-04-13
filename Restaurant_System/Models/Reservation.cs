@@ -2,26 +2,22 @@
 {
     public class Reservation
     {
-        public int Id { get; set; }
         public DateTime ReservationDateTime { get; set; }
         public int NumberOfPeople { get; set; }
         public string CustomerName { get; set; }
         public string ContactNumber { get; set; }
-        public int TableId { get; set; }
 
-        public Reservation(int id, DateTime reservationDateTime, int numberOfPeople, string customerName, string contactNumber, int tableId)
+        public Reservation(DateTime reservationDateTime, int numberOfPeople, string customerName, string contactNumber)
         {
-            Id = id;
             ReservationDateTime = reservationDateTime;
             NumberOfPeople = numberOfPeople;
             CustomerName = customerName;
             ContactNumber = contactNumber;
-            TableId = tableId;
         }
 
         public override string ToString()
         {
-            return $"Reservation Id: {Id}, Date and Time: {ReservationDateTime}, People: {NumberOfPeople}, Customer: {CustomerName}, Contact: {ContactNumber}, Table Id: {TableId}";
+            return $"Reservation Date and Time: {ReservationDateTime}, People: {NumberOfPeople}, Customer: {CustomerName}, Contact: {ContactNumber}";
         }
     }
 }

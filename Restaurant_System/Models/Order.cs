@@ -2,14 +2,14 @@
 {
     public class Order
     {
-        public int Id { get; set; }
+        public int NumberOfPeople { get; set; }
         public List<OrderItem> Items { get; set; }
         public DateTime Checkin { get; set; }
         public DateTime Checkout { get; set; }
 
-        public Order(int id, DateTime checkin)
+        public Order(int numberOfPeople, DateTime checkin)
         {
-            Id = id;
+            NumberOfPeople = numberOfPeople;
             Checkin = checkin;
             Items = new List<OrderItem>();
         }
@@ -27,9 +27,8 @@
 
         public override string ToString()
         {
-            var idString = $"Id: {Id}\r\n";
             var itemsString = string.Join("\r\n", Items.Select(x => x.ToString()));
-            return idString + itemsString;
+            return itemsString;
         }
     }
 }
