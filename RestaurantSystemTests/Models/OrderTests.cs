@@ -2,7 +2,7 @@ using RestaurantSystem.Models;
 
 namespace RestaurantSystemTests.Models
 {
-    public class ReceiptTests
+    public class OrderTests
     {
         [SetUp]
         public void Setup()
@@ -14,7 +14,6 @@ namespace RestaurantSystemTests.Models
         {
             //Arrange
             var order = new Order(2, DateTime.Now);
-            var receipt = new Receipt(1, DateTime.Now, order, "Dominos" );
             var pizza = new Dish(1, "Pizza", 12.55m);
             var fanta = new Drink(2, "Fanta", 2.50m);
             decimal expectedPrice = 30.10m;
@@ -22,7 +21,7 @@ namespace RestaurantSystemTests.Models
             //Act
             order.AddOrderItem(pizza, 2);
             order.AddOrderItem(fanta, 2);
-            var totalPrice = receipt.TotalAmountVatIncluded();
+            var totalPrice = order.TotalAmountVatIncluded();
 
             //Assert
             Assert.AreEqual(expectedPrice, totalPrice);
@@ -34,7 +33,6 @@ namespace RestaurantSystemTests.Models
         {
             //Arrange
             var order = new Order(2, DateTime.Now);
-            var receipt = new Receipt(1, DateTime.Now, order, "Dominos");
             var pizza = new Dish(1, "Pizza", 12.55m);
             var fanta = new Drink(2, "Fanta", 2.50m);
             decimal expectedVat = 6.321m;
@@ -42,7 +40,7 @@ namespace RestaurantSystemTests.Models
             //Act
             order.AddOrderItem(pizza, 2);
             order.AddOrderItem(fanta, 2);
-            var vat = receipt.VatAmount();
+            var vat = order.VatAmount();
 
             //Assert
             Assert.AreEqual(expectedVat, vat);
@@ -53,7 +51,6 @@ namespace RestaurantSystemTests.Models
         {
             //Arrange
             var order = new Order(2, DateTime.Now);
-            var receipt = new Receipt(1, DateTime.Now, order, "Dominos");
             var pizza = new Dish(1, "Pizza", 12.55m);
             var fanta = new Drink(2, "Fanta", 2.50m);
             decimal expectedPrice = 23.779m;
@@ -61,7 +58,7 @@ namespace RestaurantSystemTests.Models
             //Act
             order.AddOrderItem(pizza, 2);
             order.AddOrderItem(fanta, 2);
-            var totalPrice = receipt.TotalAmountWithoutVat();
+            var totalPrice = order.TotalAmountWithoutVat();
 
             //Assert
             Assert.AreEqual(expectedPrice, totalPrice);

@@ -7,6 +7,8 @@
         public DateTime Checkin { get; set; }
         public DateTime Checkout { get; set; }
 
+        private decimal vatRate = 0.21m;
+
         public Order(int numberOfPeople, DateTime checkin)
         {
             NumberOfPeople = numberOfPeople;
@@ -23,6 +25,26 @@
         public void CheckoutOrder(DateTime checkoutDate) 
         {
             Checkout = checkoutDate;
+        }
+
+        public decimal TotalAmountVatIncluded()
+        {
+            decimal totalAmount = 0;
+            foreach (var item in Items)
+            {
+                totalAmount += item.Quantity * item.OrderedItem.Price;
+            }
+            return totalAmount;
+        }
+
+        public decimal TotalAmountWithoutVat()
+        {
+            return TotalAmountVatIncluded() - VatAmount();
+        }
+
+        public decimal VatAmount()
+        {
+            return TotalAmountVatIncluded() * vatRate;
         }
 
         public override string ToString()
