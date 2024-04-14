@@ -57,7 +57,8 @@
 
         public override string ToString()
         {
-            return $"Id: {Id}, Number of seats: {NumberOfSeats}";
+            string status = IsFree() ? "Free" : "Occupied";
+            return $"Id: {Id}, Number of seats: {NumberOfSeats}, Status: {status}";
         }
     }
 }

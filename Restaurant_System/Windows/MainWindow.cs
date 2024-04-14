@@ -1,7 +1,16 @@
-﻿namespace RestaurantSystem.Windows
+﻿using RestaurantSystem.Models;
+
+namespace RestaurantSystem.Windows
 {
     public class MainWindow
     {
+        private readonly EmployeeWindow _employeeWindow;
+
+        public MainWindow(EmployeeWindow employeeWindow)
+        {
+            _employeeWindow = employeeWindow;
+        }
+
         public void Load()
         {
             while (true)
@@ -25,13 +34,17 @@
         {
             Console.Clear();
             Console.WriteLine("Welcome to restaurant system!");
-            Console.WriteLine("1. Login \n2. Exit");
+            Console.WriteLine("1. Login \r\n2. Exit");
             Console.Write("Enter number from 1 to 2: ");
         }
 
         public void EmployeeLogin()
         {
-            Console.WriteLine("Enter your identification number: ");
+            Console.Clear();
+            Console.Write("Enter your identification number: ");
+            Console.ReadLine();
+            Employee employee = new Employee(1, "Ana");
+            _employeeWindow.Load(employee);
         }
     }
 }
