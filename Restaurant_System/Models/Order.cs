@@ -6,14 +6,18 @@
         public List<OrderItem> Items { get; set; }
         public DateTime Checkin { get; set; }
         public DateTime Checkout { get; set; }
+        public int TableId {  get; set; }
+        public int TableNumberOfSeats {  get; set; }
 
         private decimal vatRate = 0.21m;
 
-        public Order(int numberOfPeople, DateTime checkin)
+        public Order(int numberOfPeople, DateTime checkin, int tableId, int tableNumberOfSeats)
         {
             NumberOfPeople = numberOfPeople;
             Checkin = checkin;
             Items = new List<OrderItem>();
+            TableId = tableId;
+            TableNumberOfSeats = tableNumberOfSeats;
         }
 
         public void AddOrderItem(MenuItem product, int quantity)

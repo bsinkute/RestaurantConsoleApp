@@ -34,7 +34,7 @@
         {
             if (Reservation != null && ActiveOrder == null)
             {
-                Order order = new Order(Reservation.NumberOfPeople, Reservation.ReservationDateTime);
+                Order order = new Order(Reservation.NumberOfPeople, Reservation.ReservationDateTime, Id, NumberOfSeats);
                 ActiveOrder = order;
                 Reservation = null;
             }

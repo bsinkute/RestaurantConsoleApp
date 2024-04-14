@@ -13,7 +13,7 @@ namespace RestaurantSystemTests.Models
         public void TotalAmountVatIncluded_CalculateTotalPrice()
         {
             //Arrange
-            var order = new Order(2, DateTime.Now);
+            var order = new Order(2, DateTime.Now, 2, 5);
             var pizza = new Dish(1, "Pizza", 12.55m);
             var fanta = new Drink(2, "Fanta", 2.50m);
             decimal expectedPrice = 30.10m;
@@ -32,7 +32,7 @@ namespace RestaurantSystemTests.Models
         public void VatAmount_CalculateVatAmount()
         {
             //Arrange
-            var order = new Order(2, DateTime.Now);
+            var order = new Order(2, DateTime.Now, 2, 5);
             var pizza = new Dish(1, "Pizza", 12.55m);
             var fanta = new Drink(2, "Fanta", 2.50m);
             decimal expectedVat = 6.321m;
@@ -50,7 +50,7 @@ namespace RestaurantSystemTests.Models
         public void TotalAmountWithoutVat_CalculatePriceWithoutVat()
         {
             //Arrange
-            var order = new Order(2, DateTime.Now);
+            var order = new Order(2, DateTime.Now, 2, 5);
             var pizza = new Dish(1, "Pizza", 12.55m);
             var fanta = new Drink(2, "Fanta", 2.50m);
             decimal expectedPrice = 23.779m;

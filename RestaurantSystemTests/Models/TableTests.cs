@@ -43,7 +43,7 @@ namespace RestaurantSystemTests.Models
         {
             //Arrange
             var table = new Table(1, 5);
-            var order = new Order(5, DateTime.Now);
+            var order = new Order(5, DateTime.Now, 1, 5);
 
             //Act
             bool isOccupied = table.Occupy(order);
@@ -59,7 +59,7 @@ namespace RestaurantSystemTests.Models
         {
             //Arrange
             var table = new Table(1, 5);
-            var order = new Order(5, DateTime.Now);
+            var order = new Order(5, DateTime.Now, 1, 5);
             var reservation = new Reservation(DateTime.Now, 4, "Birute", "+37060054640");
 
             //Act
@@ -124,8 +124,8 @@ namespace RestaurantSystemTests.Models
         {
             //Arrange
             var table = new Table(1, 5);
-            var orderFirst = new Order(5, DateTime.Now);
-            var orderSecond = new Order(4, DateTime.Now);
+            var orderFirst = new Order(5, DateTime.Now, 5, 5);
+            var orderSecond = new Order(4, DateTime.Now, 4, 5);
 
 
             //Act
@@ -143,7 +143,7 @@ namespace RestaurantSystemTests.Models
             //Arrange
             var table = new Table(1, 5);
             var reservation = new Reservation(DateTime.Now, 4, "Birute", "+37060054640");
-            var order = new Order(5, DateTime.Now);
+            var order = new Order(5, DateTime.Now, 5, 5);
 
             //Act
             bool isReserved = table.Reserve(reservation);
@@ -159,7 +159,7 @@ namespace RestaurantSystemTests.Models
         {
             //Arrange
             var table = new Table(1, 5);
-            var order = new Order(7, DateTime.Now);
+            var order = new Order(7, DateTime.Now, 7, 5);
 
             //Act
             bool isOccupied = table.Occupy(order);
@@ -173,7 +173,7 @@ namespace RestaurantSystemTests.Models
         {
             //Arrange
             var table = new Table(1, 5);
-            var order = new Order(4, DateTime.Now);
+            var order = new Order(4, DateTime.Now, 4, 5);
 
             //Act
             bool isOccupied = table.Occupy(order);
