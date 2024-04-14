@@ -1,10 +1,13 @@
-﻿namespace RestaurantSystem
+﻿using RestaurantSystem.Windows;
+
+namespace RestaurantSystem
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Load();
         }
     }
 }
