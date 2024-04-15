@@ -11,13 +11,13 @@ namespace RestaurantSystem.Windows
             while (true)
             {
                 Console.WriteLine("Add new menu item:");
-                Console.Write("Type 'D' for Dish or 'G' for Drink: ");
-                string typeInput = Console.ReadLine().ToLower();
+                Console.Write("Type '1' for Dish or '2' for Drink: ");
 
-                if (typeInput != "d" && typeInput != "g")
+                bool isChoiseCorrect = int.TryParse(Console.ReadLine(), out int choise);
+                while (!isChoiseCorrect || choise < 1 || choise > 2)
                 {
                     Console.WriteLine("Invalid type selection. Please try again.");
-                    continue;
+                    isChoiseCorrect = int.TryParse(Console.ReadLine(), out choise);
                 }
 
                 Console.Write("Name: ");
@@ -33,7 +33,7 @@ namespace RestaurantSystem.Windows
                 }
 
                 MenuItem menuItem;
-                if (typeInput == "d")
+                if (choise == 1)
                 {
                     menuItem = new Dish(1, name, price);
                 }
