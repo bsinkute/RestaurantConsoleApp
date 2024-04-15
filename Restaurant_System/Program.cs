@@ -7,7 +7,10 @@ namespace RestaurantSystem
         static void Main(string[] args)
         {
             TakeOrderWindow takeOrderWindow = new TakeOrderWindow();
-            EmployeeWindow employeeWindow = new EmployeeWindow(takeOrderWindow);
+            AddMenuItemWindow addMenuItemWindow = new AddMenuItemWindow();
+            ReviewOrdersWindow reviewOrdersWindow = new ReviewOrdersWindow();
+            DailyStatisticsWindow dailyStatisticsWindow = new DailyStatisticsWindow();
+            EmployeeWindow employeeWindow = new EmployeeWindow(takeOrderWindow, addMenuItemWindow, reviewOrdersWindow, dailyStatisticsWindow);
             MainWindow mainWindow = new MainWindow(employeeWindow);
             mainWindow.Load();
         }

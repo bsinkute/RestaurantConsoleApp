@@ -19,7 +19,27 @@ namespace RestaurantSystem.Windows
             {
                 Console.WriteLine(table);
             }
-            Console.ReadLine();
+            Console.Write("Enter the Id of the table at which you want customers to sit: ");
+            string input = Console.ReadLine();
+            bool isValidNumber = int.TryParse(input, out int tableId);
+            bool tableExists = tables.Any(table => table.Id == tableId);
+
+            while (!isValidNumber || !tableExists)
+            {
+                if (!isValidNumber)
+                {
+                    Console.Write("Invalid input. Please enter a valid table Id: ");
+                }
+                else if (!tableExists)
+                {
+                    Console.Write($"Table with Id {tableId} does not exist. Enter a valid table Id: ");
+                }
+                input = Console.ReadLine();
+                isValidNumber = int.TryParse(input, out tableId);
+                tableExists = tables.Any(table => table.Id == tableId);
+            }
+            Table selectedTable = tables.FirstOrDefault(t => t.Id == tableId);
+            Console.WriteLine($"Table {tableId} selected. Number of seats: {selectedTable.NumberOfSeats}");
         }
 
     }

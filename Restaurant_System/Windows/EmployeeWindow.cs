@@ -5,9 +5,15 @@ namespace RestaurantSystem.Windows
     public class EmployeeWindow
     {
         private readonly TakeOrderWindow _takeOrderWindow;
-        public EmployeeWindow(TakeOrderWindow takeOrderWindow) 
-        { 
+        private readonly AddMenuItemWindow _addMenuItemWindow;
+        private readonly ReviewOrdersWindow _reviewOrdersWindow;
+        private readonly DailyStatisticsWindow _dailyStatisticsWindow;
+        public EmployeeWindow(TakeOrderWindow takeOrderWindow, AddMenuItemWindow addMenuItemWindow, ReviewOrdersWindow reviewOrdersWindow, DailyStatisticsWindow dailyStatisticsWindow)
+        {
             _takeOrderWindow = takeOrderWindow;
+            _addMenuItemWindow = addMenuItemWindow;
+            _reviewOrdersWindow = reviewOrdersWindow;
+            _dailyStatisticsWindow = dailyStatisticsWindow;
         }
         public void Load(Employee employee)
         {
@@ -15,9 +21,9 @@ namespace RestaurantSystem.Windows
             {
                 DisplayMenu(employee);
                 bool isLoadCorect = int.TryParse(Console.ReadLine(), out int loadSelect);
-                while (!isLoadCorect || loadSelect < 1 || loadSelect > 4)
+                while (!isLoadCorect || loadSelect < 1 || loadSelect > 5)
                 {
-                    Console.Write("Please enter a number from 1 to 4: ");
+                    Console.Write("Please enter a number from 1 to 5: ");
                     isLoadCorect = int.TryParse(Console.ReadLine(), out loadSelect);
                 }
                 switch (loadSelect)
@@ -26,11 +32,20 @@ namespace RestaurantSystem.Windows
                         _takeOrderWindow.Load();
                         break;
                     case 2:
-                       /* _userLoginService.Login();*/
+                        _addMenuItemWindow.Load();
                         break;
                     case 3:
-                       /* _adminLogin.Login();*/
+                        _reviewOrdersWindow.Load();
                         break;
+                    case 4:
+                        _dailyStatisticsWindow.Load();
+                        break;
+                    case 5:
+                        Console.Clear();
+                        Console.WriteLine("You Loged Out.");
+                        Console.WriteLine("Press any key.");
+                        Console.ReadKey();
+                        return;
                     default:
                         break;
                 }
@@ -41,8 +56,8 @@ namespace RestaurantSystem.Windows
         {
             Console.Clear();
             Console.WriteLine($"Welcome {employee.Name}!");
-            Console.WriteLine("1. Take order \r\n2. Review exsisting orders \r\n3. Daily statistics \r\n4. Logout");
-            Console.Write("Enter number from 1 to 4: ");
+            Console.WriteLine("1. Take order \r\n2. Add new menu item \r\n3. Review exsisting orders \r\n4. Daily statistics \r\n5. Logout");
+            Console.Write("Enter number from 1 to 5: ");
         }
 
     }
