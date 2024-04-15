@@ -4,12 +4,12 @@ namespace RestaurantSystem.Windows
 {
     public class TakeOrderWindow
     {
-        public void Load()
+        public void Load(Employee employee)
         {
             List<Table> tables = new List<Table>();
             Table table1 = new Table(1, 5);
             Table table2 = new Table(2, 3);
-            Order someOrder = new Order(1, DateTime.Now, 2, 3);
+            Order someOrder = new Order(1, DateTime.Now, 2, 3, employee.Id);
             table2.Occupy(someOrder);
             Table table3 = new Table(3, 2);
             tables.Add(table1);
@@ -71,7 +71,7 @@ namespace RestaurantSystem.Windows
             Table selectedTable = tables.FirstOrDefault(t => t.Id == tableId);
             Console.WriteLine($"Table {tableId} selected. Number of seats: {selectedTable.NumberOfSeats}");
 
-            Order order = new Order(numberOfPeople, DateTime.Now, selectedTable.Id, selectedTable.NumberOfSeats);
+            Order order = new Order(numberOfPeople, DateTime.Now, selectedTable.Id, selectedTable.NumberOfSeats, employee.Id);
             selectedTable.Occupy(order);
 
             Console.Clear();

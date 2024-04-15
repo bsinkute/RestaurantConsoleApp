@@ -29,7 +29,7 @@ namespace RestaurantSystem.Windows
                 switch (loadSelect)
                 {
                     case 1:
-                        _takeOrderWindow.Load();
+                        _takeOrderWindow.Load(employee);
                         break;
                     case 2:
                         _addMenuItemWindow.Load();
