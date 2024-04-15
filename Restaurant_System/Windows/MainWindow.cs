@@ -1,14 +1,17 @@
-﻿using RestaurantSystem.Models;
+﻿using RestaurantSystem.Interfaces;
+using RestaurantSystem.Models;
 
 namespace RestaurantSystem.Windows
 {
     public class MainWindow
     {
         private readonly EmployeeWindow _employeeWindow;
+        private readonly IEmployeeService _employeeService;
 
-        public MainWindow(EmployeeWindow employeeWindow)
+        public MainWindow(EmployeeWindow employeeWindow, IEmployeeService employeeService)
         {
             _employeeWindow = employeeWindow;
+            _employeeService = employeeService;
         }
 
         public void Load()
@@ -40,11 +43,32 @@ namespace RestaurantSystem.Windows
 
         public void EmployeeLogin()
         {
+            List<Employee> employees = _employeeService.GetEmployees();
             Console.Clear();
+            Console.WriteLine("Employees list:");
+            foreach (Employee employee in employees)
+            {
+                Console.WriteLine(employee);
+            }
             Console.Write("Enter your identification number: ");
-            Console.ReadLine();
-            Employee employee = new Employee(1, "Ana");
-            _employeeWindow.Load(employee);
+            bool isChoiseCorrect = int.TryParse(Console.ReadLine(), out int choise);
+            bool employeeExist = employees.Any(employees => employees.Id == choise);
+            while (!isChoiseCorrect || !employeeExist)
+            {
+                if (!isChoiseCorrect)
+                {
+                    Console.Write("Invalid input. Please enter a valid employee Id: ");
+                }
+                else if (!employeeExist)
+                {
+                    Console.Write($"Employee with Id {choise} does not exist. Enter a valid employee Id: ");
+                }
+                isChoiseCorrect = int.TryParse(Console.ReadLine(), out choise);
+                employeeExist = employees.Any(employees => employees.Id == choise);
+            }
+
+            Employee selectedEmployee = employees.FirstOrDefault(employee => employee.Id == choise);
+            _employeeWindow.Load(selectedEmployee);
         }
     }
 }
