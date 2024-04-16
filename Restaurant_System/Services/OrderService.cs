@@ -24,7 +24,16 @@ namespace RestaurantSystem.Services
 
         public void AddOrder(Order order)
         {
-            List<Order> orders = _orderDataService.ReadJson() ?? new List<Order>();
+            List<Order> orders = _orderDataService.ReadJson();
+            if(orders == null)
+            {
+                orders = new List<Order>();
+                order.OrderId = 1;
+            }
+            else
+            {
+                order.OrderId = orders.Max(o => o.OrderId) + 1;
+            }
             orders.Add(order);
             _orderDataService.WriteJson(orders);
         }

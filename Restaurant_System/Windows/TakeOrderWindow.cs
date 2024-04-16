@@ -72,10 +72,18 @@ namespace RestaurantSystem.Windows
             Table selectedTable = tables.FirstOrDefault(t => t.Id == tableId);
             Console.WriteLine($"Table {tableId} selected. Number of seats: {selectedTable.NumberOfSeats}");
 
-            Order order = new Order(numberOfPeople, DateTime.Now, selectedTable.Id, selectedTable.NumberOfSeats, employee.Id);
+            Order order = new Order
+            {
+                NumberOfPeople = numberOfPeople,
+                Checkin = DateTime.Now,
+                TableId = selectedTable.Id,
+                TableNumberOfSeats = selectedTable.NumberOfSeats,
+                EmployeeId = employee.Id,
+            };
+
+            _orderService.AddOrder(order);
             selectedTable.Occupy(order);
             _tableService.SaveTables(tables);
-            _orderService.AddOrder(order);
 
             Console.Clear();
             Console.WriteLine("Tables:");

@@ -4,12 +4,12 @@
     {
         public int Id { get; set; }
         public int NumberOfSeats {  get; set; }
-        public Order ActiveOrder { get; set; }
+        public int ActiveOrderId { get; set; }
         public Reservation Reservation { get; set; }
 
         public bool IsFree()
         {
-            bool noActiveOrder = ActiveOrder == null;
+            bool noActiveOrder = ActiveOrderId == 0;
             bool noReservation = Reservation == null;
             return noActiveOrder && noReservation;
         }
@@ -24,21 +24,11 @@
             return false;
         }
 
-        public void ActivateReservation()
-        {
-            if (Reservation != null && ActiveOrder == null)
-            {
-                Order order = new Order(Reservation.NumberOfPeople, Reservation.ReservationDateTime, Id, NumberOfSeats, Reservation.EmployeeId);
-                ActiveOrder = order;
-                Reservation = null;
-            }
-        }
-
         public bool Occupy(Order order)
         {
             if (IsFree() && NumberOfSeats >= order.NumberOfPeople)
             {
-                ActiveOrder = order;
+                ActiveOrderId = order.OrderId;
                 return true;
             }
             return false;
@@ -46,7 +36,7 @@
 
         public void FreeUp()
         {
-            ActiveOrder = null;
+            ActiveOrderId = 0;
         }
 
         public override string ToString()

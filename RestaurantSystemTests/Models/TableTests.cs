@@ -43,7 +43,11 @@ namespace RestaurantSystemTests.Models
         {
             //Arrange
             var table = new Table { NumberOfSeats = 5 };
-            var order = new Order(5, DateTime.Now, 1, 5, 1);
+            var order = new Order
+            {
+                OrderId = 1,
+                NumberOfPeople = 5,
+            };
 
             //Act
             bool isOccupied = table.Occupy(order);
@@ -59,7 +63,11 @@ namespace RestaurantSystemTests.Models
         {
             //Arrange
             var table = new Table { NumberOfSeats = 5 };
-            var order = new Order(5, DateTime.Now, 1, 5, 1);
+            var order = new Order
+            {
+                OrderId = 1,
+                NumberOfPeople = 5,
+            };
             var reservation = new Reservation(DateTime.Now, 4, "Birute", "+37060054640", 1);
 
             //Act
@@ -103,29 +111,20 @@ namespace RestaurantSystemTests.Models
         }
 
         [Test]
-        public void ActivateReservation_ActivatesSuccessfuly()
-        {
-            //Arrange
-            var table = new Table { NumberOfSeats = 5 };
-            var reservation = new Reservation(DateTime.Now, 4, "Birute", "+37060054640", 1);
-
-            //Act
-            bool isReserved = table.Reserve(reservation);
-            table.ActivateReservation();
-            bool isOrderActive = table.ActiveOrder != null;
-
-            //Assert
-            Assert.IsTrue(isReserved);
-            Assert.IsTrue(isOrderActive);
-        }
-
-        [Test]
         public void Occupy_NotOccupyWithOrder()
         {
             //Arrange
             var table = new Table { NumberOfSeats = 5 };
-            var orderFirst = new Order(5, DateTime.Now, 5, 5, 1);
-            var orderSecond = new Order(4, DateTime.Now, 4, 5, 1);
+            var orderFirst = new Order
+            {
+                OrderId = 1,
+                NumberOfPeople = 5,
+            };
+            var orderSecond = new Order
+            {
+                OrderId = 2,
+                NumberOfPeople = 4,
+            };
 
 
             //Act
@@ -143,7 +142,7 @@ namespace RestaurantSystemTests.Models
             //Arrange
             var table = new Table { NumberOfSeats = 5 };
             var reservation = new Reservation(DateTime.Now, 4, "Birute", "+37060054640", 1);
-            var order = new Order(5, DateTime.Now, 5, 5, 1);
+            var order = new Order { OrderId = 1, NumberOfPeople = 5 };
 
             //Act
             bool isReserved = table.Reserve(reservation);
@@ -159,7 +158,7 @@ namespace RestaurantSystemTests.Models
         {
             //Arrange
             var table = new Table { NumberOfSeats = 5 };
-            var order = new Order(7, DateTime.Now, 7, 5, 1);
+            var order = new Order { OrderId = 1, NumberOfPeople = 7 };
 
             //Act
             bool isOccupied = table.Occupy(order);
@@ -173,7 +172,7 @@ namespace RestaurantSystemTests.Models
         {
             //Arrange
             var table = new Table { NumberOfSeats = 5 };
-            var order = new Order(4, DateTime.Now, 4, 5, 1);
+            var order = new Order { OrderId = 1, NumberOfPeople = 4 };
 
             //Act
             bool isOccupied = table.Occupy(order);

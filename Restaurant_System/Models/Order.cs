@@ -3,25 +3,15 @@
     public class Order
     {
         public int NumberOfPeople { get; set; }
-        public List<OrderItem> Items { get; set; }
+        public List<OrderItem> Items { get; set; } = new List<OrderItem>();
         public DateTime Checkin { get; set; }
         public DateTime Checkout { get; set; }
         public int TableId {  get; set; }
         public int TableNumberOfSeats {  get; set; }
         public int EmployeeId {  get; set; }
-        public object Id { get; internal set; }
+        public int OrderId { get; set; }
 
         private decimal vatRate = 0.21m;
-
-        public Order(int numberOfPeople, DateTime checkin, int tableId, int tableNumberOfSeats, int employeeId)
-        {
-            NumberOfPeople = numberOfPeople;
-            Checkin = checkin;
-            Items = new List<OrderItem>();
-            TableId = tableId;
-            TableNumberOfSeats = tableNumberOfSeats;
-            EmployeeId = employeeId;
-        }
 
         public void AddOrderItem(MenuItem product, int quantity)
         {
