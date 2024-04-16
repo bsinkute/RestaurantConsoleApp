@@ -22,7 +22,8 @@ namespace RestaurantSystem
             AddMenuItemWindow addMenuItemWindow = new AddMenuItemWindow();
             ReviewOrdersWindow reviewOrdersWindow = new ReviewOrdersWindow(tableService, orderService);
             DailyStatisticsWindow dailyStatisticsWindow = new DailyStatisticsWindow();
-            EmployeeWindow employeeWindow = new EmployeeWindow(takeOrderWindow, addMenuItemWindow, reviewOrdersWindow, dailyStatisticsWindow);
+            FinishOrderWindow finishOrderWindow = new FinishOrderWindow();
+            EmployeeWindow employeeWindow = new EmployeeWindow(takeOrderWindow, addMenuItemWindow, reviewOrdersWindow, dailyStatisticsWindow, finishOrderWindow);
             MainWindow mainWindow = new MainWindow(employeeWindow, employeeService);
             mainWindow.Load();
         }

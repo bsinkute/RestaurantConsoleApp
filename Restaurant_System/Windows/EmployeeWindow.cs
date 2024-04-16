@@ -8,12 +8,20 @@ namespace RestaurantSystem.Windows
         private readonly AddMenuItemWindow _addMenuItemWindow;
         private readonly ReviewOrdersWindow _reviewOrdersWindow;
         private readonly DailyStatisticsWindow _dailyStatisticsWindow;
-        public EmployeeWindow(TakeOrderWindow takeOrderWindow, AddMenuItemWindow addMenuItemWindow, ReviewOrdersWindow reviewOrdersWindow, DailyStatisticsWindow dailyStatisticsWindow)
+        private readonly FinishOrderWindow _finishOrderWindow;
+
+        public EmployeeWindow(
+            TakeOrderWindow takeOrderWindow, 
+            AddMenuItemWindow addMenuItemWindow, 
+            ReviewOrdersWindow reviewOrdersWindow, 
+            DailyStatisticsWindow dailyStatisticsWindow, 
+            FinishOrderWindow finishOrderWindow)
         {
             _takeOrderWindow = takeOrderWindow;
             _addMenuItemWindow = addMenuItemWindow;
             _reviewOrdersWindow = reviewOrdersWindow;
             _dailyStatisticsWindow = dailyStatisticsWindow;
+            _finishOrderWindow = finishOrderWindow;
         }
         public void Load(Employee employee)
         {
@@ -38,9 +46,12 @@ namespace RestaurantSystem.Windows
                         _reviewOrdersWindow.Load(employee);
                         break;
                     case 4:
-                        _dailyStatisticsWindow.Load();
+                        _finishOrderWindow.Load(employee);
                         break;
                     case 5:
+                        _dailyStatisticsWindow.Load();
+                        break;
+                    case 6:
                         Console.Clear();
                         Console.WriteLine("You Loged Out.");
                         Console.WriteLine("Press any key.");
