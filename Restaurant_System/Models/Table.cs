@@ -2,16 +2,10 @@
 {
     public class Table
     {
-        public int Id { get; private set; }
+        public int Id { get; set; }
         public int NumberOfSeats {  get; set; }
-        public Order ActiveOrder { get; private set; }
-        public Reservation Reservation { get; private set; }
-
-        public Table(int id, int numberOfSeat)
-        {
-            Id = id;
-            NumberOfSeats = numberOfSeat;
-        }
+        public Order ActiveOrder { get; set; }
+        public Reservation Reservation { get; set; }
 
         public bool IsFree()
         {

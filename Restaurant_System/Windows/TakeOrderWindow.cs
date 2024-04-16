@@ -1,20 +1,21 @@
-﻿using RestaurantSystem.Models;
+﻿using RestaurantSystem.Interfaces;
+using RestaurantSystem.Models;
 
 namespace RestaurantSystem.Windows
 {
     public class TakeOrderWindow
     {
+        private readonly ITableService _tableService;
+        private readonly IOrderService _orderService;
+
+        public TakeOrderWindow(ITableService tableService, IOrderService orderService)
+        {
+            _tableService = tableService;
+            _orderService = orderService;
+        }
         public void Load(Employee employee)
         {
-            List<Table> tables = new List<Table>();
-            Table table1 = new Table(1, 5);
-            Table table2 = new Table(2, 3);
-            Order someOrder = new Order(1, DateTime.Now, 2, 3, employee.Id);
-            table2.Occupy(someOrder);
-            Table table3 = new Table(3, 2);
-            tables.Add(table1);
-            tables.Add(table2);
-            tables.Add(table3);
+            List<Table> tables = _tableService.GetTables();
             Console.Clear();
             Console.Write("How many guests should be seated? ");
             bool isCorectNumber = int.TryParse(Console.ReadLine(), out int numberOfPeople);
@@ -73,6 +74,8 @@ namespace RestaurantSystem.Windows
 
             Order order = new Order(numberOfPeople, DateTime.Now, selectedTable.Id, selectedTable.NumberOfSeats, employee.Id);
             selectedTable.Occupy(order);
+            _tableService.SaveTables(tables);
+            _orderService.AddOrder(order);
 
             Console.Clear();
             Console.WriteLine("Tables:");

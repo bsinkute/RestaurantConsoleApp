@@ -13,7 +13,7 @@ namespace RestaurantSystemTests.Models
         public void IsFree_WhenReservationAndOrderIsNull()
         {
             //Arrange
-            var table = new Table(1, 5);
+            var table = new Table() { NumberOfSeats = 5 };
 
             //Act
             bool isFree = table.IsFree();
@@ -26,7 +26,7 @@ namespace RestaurantSystemTests.Models
         public void IsFree_NotFreeWithReservation()
         {
             //Arrange
-            var table = new Table(1, 5);
+            var table = new Table { NumberOfSeats = 5 };
             var reservation = new Reservation(DateTime.Now, 4, "Birute", "+37060054640", 1);
 
             //Act
@@ -42,7 +42,7 @@ namespace RestaurantSystemTests.Models
         public void IsFree_NotFreeWithOrder()
         {
             //Arrange
-            var table = new Table(1, 5);
+            var table = new Table { NumberOfSeats = 5 };
             var order = new Order(5, DateTime.Now, 1, 5, 1);
 
             //Act
@@ -58,7 +58,7 @@ namespace RestaurantSystemTests.Models
         public void Reserve_NotReserveWithOrder()
         {
             //Arrange
-            var table = new Table(1, 5);
+            var table = new Table { NumberOfSeats = 5 };
             var order = new Order(5, DateTime.Now, 1, 5, 1);
             var reservation = new Reservation(DateTime.Now, 4, "Birute", "+37060054640", 1);
 
@@ -75,7 +75,7 @@ namespace RestaurantSystemTests.Models
         public void Reserve_NotReserveWithReservation()
         {
             //Arrange
-            var table = new Table(1, 5);
+            var table = new Table { NumberOfSeats = 5 };
             var firstReservation = new Reservation(DateTime.Now, 4, "Birute", "+37060054640", 1);
             var secondReservation = new Reservation(DateTime.Now, 5, "Ana", "+37060054660", 1);
 
@@ -92,7 +92,7 @@ namespace RestaurantSystemTests.Models
         public void Reserve_NotReservePeopleMoreThanSeats()
         {
             //Arrange
-            var table = new Table(1, 5);
+            var table = new Table { NumberOfSeats = 5 };
             var reservation = new Reservation(DateTime.Now, 6, "Birute", "+37060054640", 1);
 
             //Act
@@ -106,7 +106,7 @@ namespace RestaurantSystemTests.Models
         public void ActivateReservation_ActivatesSuccessfuly()
         {
             //Arrange
-            var table = new Table(1, 5);
+            var table = new Table { NumberOfSeats = 5 };
             var reservation = new Reservation(DateTime.Now, 4, "Birute", "+37060054640", 1);
 
             //Act
@@ -123,7 +123,7 @@ namespace RestaurantSystemTests.Models
         public void Occupy_NotOccupyWithOrder()
         {
             //Arrange
-            var table = new Table(1, 5);
+            var table = new Table { NumberOfSeats = 5 };
             var orderFirst = new Order(5, DateTime.Now, 5, 5, 1);
             var orderSecond = new Order(4, DateTime.Now, 4, 5, 1);
 
@@ -141,7 +141,7 @@ namespace RestaurantSystemTests.Models
         public void Occupy_NotOccupyWithReservation()
         {
             //Arrange
-            var table = new Table(1, 5);
+            var table = new Table { NumberOfSeats = 5 };
             var reservation = new Reservation(DateTime.Now, 4, "Birute", "+37060054640", 1);
             var order = new Order(5, DateTime.Now, 5, 5, 1);
 
@@ -158,7 +158,7 @@ namespace RestaurantSystemTests.Models
         public void Occupy_NotOccupyPeopleMoreThanSeats()
         {
             //Arrange
-            var table = new Table(1, 5);
+            var table = new Table { NumberOfSeats = 5 };
             var order = new Order(7, DateTime.Now, 7, 5, 1);
 
             //Act
@@ -172,7 +172,7 @@ namespace RestaurantSystemTests.Models
         public void FreeUp_FreesUp()
         {
             //Arrange
-            var table = new Table(1, 5);
+            var table = new Table { NumberOfSeats = 5 };
             var order = new Order(4, DateTime.Now, 4, 5, 1);
 
             //Act

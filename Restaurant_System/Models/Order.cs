@@ -9,6 +9,7 @@
         public int TableId {  get; set; }
         public int TableNumberOfSeats {  get; set; }
         public int EmployeeId {  get; set; }
+        public object Id { get; internal set; }
 
         private decimal vatRate = 0.21m;
 

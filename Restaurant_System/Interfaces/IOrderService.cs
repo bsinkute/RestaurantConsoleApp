@@ -4,7 +4,9 @@ namespace RestaurantSystem.Interfaces
 {
     public interface IOrderService
     {
-        List<Order> GetOrder();
-        void SaveOrder(List<Order> order);
+        List<Order> GetOrders();
+        void SaveOrders(List<Order> order);
+        void AddOrder(Order order);
+        List<Order> GetEmployeeOrders(int employeeId);
     }
 }

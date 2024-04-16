@@ -35,7 +35,7 @@ namespace RestaurantSystem.Windows
                         _addMenuItemWindow.Load();
                         break;
                     case 3:
-                        _reviewOrdersWindow.Load();
+                        _reviewOrdersWindow.Load(employee);
                         break;
                     case 4:
                         _dailyStatisticsWindow.Load();

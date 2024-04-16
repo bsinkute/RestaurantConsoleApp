@@ -11,15 +11,28 @@ namespace RestaurantSystem.Services
         {
             _orderDataService = orderDataService;
         }
-        public List<Order> GetOrder()
+        public List<Order> GetOrders()
         {
-            List<Order> order = _orderDataService.ReadJson() ?? new List<Order>();
-            return order;
+            List<Order> orders = _orderDataService.ReadJson() ?? new List<Order>();
+            return orders;
         }
 
-        public void SaveOrder(List<Order> order)
+        public void SaveOrders(List<Order> orders)
         {
-            _orderDataService.WriteJson(order);
+            _orderDataService.WriteJson(orders);
+        }
+
+        public void AddOrder(Order order)
+        {
+            List<Order> orders = _orderDataService.ReadJson() ?? new List<Order>();
+            orders.Add(order);
+            _orderDataService.WriteJson(orders);
+        }
+
+        public List<Order> GetEmployeeOrders(int employeeId)
+        {
+            List<Order> orders = _orderDataService.ReadJson() ?? new List<Order>();
+            return orders.Where(x => x.EmployeeId == employeeId).ToList();
         }
     }
 }
