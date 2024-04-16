@@ -16,20 +16,19 @@ namespace RestaurantSystem.Windows
                 bool isChoiseCorrect = int.TryParse(Console.ReadLine(), out int choise);
                 while (!isChoiseCorrect || choise < 1 || choise > 2)
                 {
-                    Console.WriteLine("Invalid type selection. Please try again.");
+                    Console.Write("Invalid type selection. Please try again: ");
                     isChoiseCorrect = int.TryParse(Console.ReadLine(), out choise);
                 }
 
                 Console.Write("Name: ");
                 string name = Console.ReadLine();
-
                 Console.Write("Price: ");
-                string priceInput = Console.ReadLine();
 
-                if (!decimal.TryParse(priceInput, out decimal price))
+                bool isPriceCorrect = decimal.TryParse(Console.ReadLine(), out decimal price);
+                while (!isPriceCorrect || price <= 0)
                 {
-                    Console.WriteLine("Invalid Price format. Please try again.");
-                    continue;
+                    Console.Write("Invalid Price format. Please try again: ");
+                    isPriceCorrect = decimal.TryParse(Console.ReadLine(), out price);
                 }
 
                 MenuItem menuItem;
