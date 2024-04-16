@@ -1,5 +1,6 @@
 ﻿using RestaurantSystem.Interfaces;
 using RestaurantSystem.Models;
+using RestaurantSystem.Services;
 
 namespace RestaurantSystem.Windows
 {
@@ -14,7 +15,11 @@ namespace RestaurantSystem.Windows
         public void Load()
         {
             Console.Clear();
-            List<MenuItem> menuItems = new List<MenuItem>();
+            Console.WriteLine("Menu:");
+            foreach (MenuItem menuItem in _menuService.GetMenu().Items)
+            {
+                Console.WriteLine(menuItem);
+            }
             while (true)
             {
                 Console.WriteLine("Add new menu item:");
@@ -41,14 +46,14 @@ namespace RestaurantSystem.Windows
                 MenuItem menuItem;
                 if (choise == 1)
                 {
-                    menuItem = new Dish(1, name, price);
+                    menuItem = new Dish(1, name, price, DateTime.Now);
                 }
                 else
                 {
-                    menuItem = new Drink(1, name, price);
+                    menuItem = new Drink(1, name, price, DateTime.Now);
                 }
 
-                menuItems.Add(menuItem);
+                _menuService.AddMenuItem(menuItem);
 
                 Console.WriteLine("Do you want to add another item? (yes/no)");
                 string addAnotherInput = Console.ReadLine().ToLower();
@@ -60,7 +65,7 @@ namespace RestaurantSystem.Windows
 
 
             Console.WriteLine("Updated menu:");
-            foreach (MenuItem menuItem in menuItems)
+            foreach (MenuItem menuItem in _menuService.GetMenu().Items)
             {
                 Console.WriteLine(menuItem);
             }

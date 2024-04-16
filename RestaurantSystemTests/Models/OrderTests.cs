@@ -14,8 +14,8 @@ namespace RestaurantSystemTests.Models
         {
             //Arrange
             var order = new Order { OrderId = 1, NumberOfPeople = 2 };
-            var pizza = new Dish(1, "Pizza", 12.55m);
-            var fanta = new Drink(2, "Fanta", 2.50m);
+            var pizza = new Dish(1, "Pizza", 12.55m, DateTime.Now);
+            var fanta = new Drink(2, "Fanta", 2.50m, DateTime.Now);
             decimal expectedPrice = 30.10m;
 
             //Act
@@ -33,8 +33,8 @@ namespace RestaurantSystemTests.Models
         {
             //Arrange
             var order = new Order { OrderId = 1, NumberOfPeople = 2 }; ;
-            var pizza = new Dish(1, "Pizza", 12.55m);
-            var fanta = new Drink(2, "Fanta", 2.50m);
+            var pizza = new Dish(1, "Pizza", 12.55m, DateTime.Now);
+            var fanta = new Drink(2, "Fanta", 2.50m, DateTime.Now);
             decimal expectedVat = 6.321m;
 
             //Act
@@ -51,8 +51,8 @@ namespace RestaurantSystemTests.Models
         {
             //Arrange
             var order = new Order { OrderId = 1, NumberOfPeople = 2 };
-            var pizza = new Dish(1, "Pizza", 12.55m);
-            var fanta = new Drink(2, "Fanta", 2.50m);
+            var pizza = new Dish(1, "Pizza", 12.55m, DateTime.Now);
+            var fanta = new Drink(2, "Fanta", 2.50m, DateTime.Now);
             decimal expectedPrice = 23.779m;
 
             //Act

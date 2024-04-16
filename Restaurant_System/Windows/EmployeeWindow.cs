@@ -29,9 +29,9 @@ namespace RestaurantSystem.Windows
             {
                 DisplayMenu(employee);
                 bool isLoadCorect = int.TryParse(Console.ReadLine(), out int loadSelect);
-                while (!isLoadCorect || loadSelect < 1 || loadSelect > 5)
+                while (!isLoadCorect || loadSelect < 1 || loadSelect > 6)
                 {
-                    Console.Write("Please enter a number from 1 to 5: ");
+                    Console.Write("Please enter a number from 1 to 6: ");
                     isLoadCorect = int.TryParse(Console.ReadLine(), out loadSelect);
                 }
                 switch (loadSelect)
@@ -67,8 +67,8 @@ namespace RestaurantSystem.Windows
         {
             Console.Clear();
             Console.WriteLine($"Welcome {employee.Name}!");
-            Console.WriteLine("1. Take order \r\n2. Add new menu item \r\n3. Review exsisting orders \r\n4. Daily statistics \r\n5. Logout");
-            Console.Write("Enter number from 1 to 5: ");
+            Console.WriteLine("1. Take order \r\n2. Add new menu item \r\n3. Review exsisting orders \r\n4. Finish order \r\n5. Daily statistics \r\n6. Logout");
+            Console.Write("Enter number from 1 to 6: ");
         }
 
     }

@@ -48,6 +48,7 @@ namespace RestaurantSystem.Services
             Menu menu = new Menu();
             menu.Items.AddRange(dishes);
             menu.Items.AddRange(drinks);
+            menu.Items.Sort();
             return menu;
         }
     }
