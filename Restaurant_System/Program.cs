@@ -13,18 +13,22 @@ namespace RestaurantSystem
             IDataService<List<Order>> orderDataService = new DataService<List<Order>> { FileName = "Orders.json" };
             IDataService<List<Table>> tableDataService = new DataService<List<Table>> { FileName = "Tables.json" };
             IDataService<List<Employee>> employeeDataService = new DataService<List<Employee>> { FileName = "Employees.json" };
+            IDataService<List<Dish>> dishDataService = new DataService<List<Dish>> { FileName = "Dishes.json"};
+            IDataService<List<Drink>> drinkDataService = new DataService<List<Drink>> { FileName = "Drinks.json" };
 
             IOrderService orderService = new OrderService(orderDataService);
             ITableService tableService = new TableService(tableDataService);
             IEmployeeService employeeService = new EmployeeService(employeeDataService);
+            IMenuService menuService = new MenuService(dishDataService, drinkDataService);
 
             TakeOrderWindow takeOrderWindow = new TakeOrderWindow(tableService, orderService);
-            AddMenuItemWindow addMenuItemWindow = new AddMenuItemWindow();
+            AddMenuItemWindow addMenuItemWindow = new AddMenuItemWindow(menuService);
             ReviewOrdersWindow reviewOrdersWindow = new ReviewOrdersWindow(tableService, orderService);
             DailyStatisticsWindow dailyStatisticsWindow = new DailyStatisticsWindow();
             FinishOrderWindow finishOrderWindow = new FinishOrderWindow();
             EmployeeWindow employeeWindow = new EmployeeWindow(takeOrderWindow, addMenuItemWindow, reviewOrdersWindow, dailyStatisticsWindow, finishOrderWindow);
             MainWindow mainWindow = new MainWindow(employeeWindow, employeeService);
+
             mainWindow.Load();
         }
     }

@@ -1,9 +1,16 @@
-﻿using RestaurantSystem.Models;
+﻿using RestaurantSystem.Interfaces;
+using RestaurantSystem.Models;
 
 namespace RestaurantSystem.Windows
 {
     public class AddMenuItemWindow
     {
+        private readonly IMenuService _menuService;
+        public AddMenuItemWindow(IMenuService menuService)
+        {
+            _menuService = menuService;
+        }
+
         public void Load()
         {
             Console.Clear();

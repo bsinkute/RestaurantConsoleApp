@@ -2,22 +2,16 @@
 {
     public class Menu
     {
-        private List<MenuItem> menuItems;
+        public List<MenuItem> Items { get; set; }
 
-        public Menu()
+        public Menu() 
         {
-            menuItems = new List<MenuItem>();
+            Items = new List<MenuItem>();
         }
 
         public override string ToString()
         {
-            return string.Join("\r\n", menuItems.Select(item => item.ToString()));
-        }
-
-        public void AddMenuItem(int id, string name, decimal price)
-        {
-            MenuItem menuItem = new MenuItem(id, name, price);
-            menuItems.Add(menuItem);
+            return string.Join("\r\n", Items.Select(item => item.ToString()));
         }
     }
 }
