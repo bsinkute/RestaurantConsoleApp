@@ -8,5 +8,6 @@ namespace RestaurantSystem.Interfaces
         void SaveOrders(List<Order> order);
         void AddOrder(Order order);
         List<Order> GetEmployeeOrders(int employeeId);
+        void AddMenuItemToOrder(int orderId, MenuItem selectedMenuItem, int quantity);
     }
 }

@@ -43,5 +43,26 @@ namespace RestaurantSystem.Services
             List<Order> orders = _orderDataService.ReadJson() ?? new List<Order>();
             return orders.Where(x => x.EmployeeId == employeeId).ToList();
         }
+
+        public void AddMenuItemToOrder(int orderId, MenuItem selectedMenuItem, int quantity)
+        {
+            List<Order> orders = _orderDataService.ReadJson();
+            Order orderToUpdate = orders.FirstOrDefault(o => o.OrderId == orderId);
+
+            if (orderToUpdate == null)
+            {
+                Console.WriteLine($"Order with ID {orderId} not found.");
+                return;
+            }
+            OrderItem orderItem = new OrderItem { OrderedItem = selectedMenuItem, Quantity = quantity };
+            for (int i = 0; i < quantity; i++)
+            {
+                
+                orderToUpdate.Items.Add(orderItem);
+            }
+
+            _orderDataService.WriteJson(orders);
+            Console.WriteLine($"{selectedMenuItem.Name} added to Order ID {orderId}.");
+        }
     }
 }

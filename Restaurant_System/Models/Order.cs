@@ -15,7 +15,7 @@
 
         public void AddOrderItem(MenuItem product, int quantity)
         {
-            var orderItem = new OrderItem(product, quantity);
+            var orderItem = new OrderItem { OrderedItem = product, Quantity = quantity };
             Items.Add(orderItem);
         }
 

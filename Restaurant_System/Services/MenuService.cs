@@ -51,5 +51,10 @@ namespace RestaurantSystem.Services
             menu.Items.Sort();
             return menu;
         }
+
+        public MenuItem GetMenuItemById(int id)
+        {
+            return GetMenu().Items.FirstOrDefault(item => item.Id == id);
+        }
     }
 }

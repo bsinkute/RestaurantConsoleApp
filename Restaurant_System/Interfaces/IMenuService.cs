@@ -6,5 +6,6 @@ namespace RestaurantSystem.Interfaces
     {
         Menu GetMenu();
         void AddMenuItem(MenuItem menuItem);
+        MenuItem GetMenuItemById(int id);
     }
 }
