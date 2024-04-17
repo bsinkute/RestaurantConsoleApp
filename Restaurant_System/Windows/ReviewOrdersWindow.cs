@@ -12,7 +12,7 @@ namespace RestaurantSystem.Windows
 
         public void Load(Employee employee)
         {
-            List<Order> activeOrders = _orderService.GetOrders();
+            List<Order> activeOrders = _orderService.GetEmployeeOrders(employee.Id);
 
             Console.Clear();
             Console.WriteLine("Active Orders:");

@@ -41,12 +41,12 @@ namespace RestaurantSystem.Services
         public List<Order> GetEmployeeOrders(int employeeId)
         {
             List<Order> orders = _orderDataService.ReadJson() ?? new List<Order>();
-            return orders.Where(x => x.EmployeeId == employeeId).ToList();
+            return orders.Where(x => x.EmployeeId == employeeId && x.Checkout == default).ToList();
         }
 
         public void AddMenuItemToOrder(int orderId, MenuItem selectedMenuItem, int quantity)
         {
-            List<Order> orders = _orderDataService.ReadJson();
+            List<Order> orders = _orderDataService.ReadJson() ?? new List<Order>();
             Order orderToUpdate = orders.FirstOrDefault(o => o.OrderId == orderId);
 
             if (orderToUpdate == null)
@@ -75,9 +75,20 @@ namespace RestaurantSystem.Services
 
             orderToClose.Checkout = DateTime.Now;
 
-            SaveOrders(GetOrders());
+            UpdateOrder(orderToClose);
 
             Console.WriteLine($"Order ID {orderToClose.OrderId} successfully closed.");
+        }
+
+        private void UpdateOrder(Order order)
+        {
+            List<Order> orders = _orderDataService.ReadJson() ?? new List<Order>();
+            int orderIndex = orders.FindIndex(x => x.OrderId == order.OrderId);
+            if (orderIndex != -1)
+            {
+                orders[orderIndex] = order;
+                _orderDataService.WriteJson(orders);
+            }
         }
     }
 }
