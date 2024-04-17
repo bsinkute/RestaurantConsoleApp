@@ -65,5 +65,19 @@ namespace RestaurantSystem.Services
             _orderDataService.WriteJson(orders);
             Console.WriteLine($"{selectedMenuItem.Name} added to Order ID {orderId}.");
         }
+
+        public void Checkout(Order orderToClose)
+        {
+            if (orderToClose == null)
+            {
+                throw new ArgumentNullException(nameof(orderToClose), "Order to close cannot be null.");
+            }
+
+            orderToClose.Checkout = DateTime.Now;
+
+            SaveOrders(GetOrders());
+
+            Console.WriteLine($"Order ID {orderToClose.OrderId} successfully closed.");
+        }
     }
 }

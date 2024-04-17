@@ -9,5 +9,7 @@ namespace RestaurantSystem.Interfaces
         void AddOrder(Order order);
         List<Order> GetEmployeeOrders(int employeeId);
         void AddMenuItemToOrder(int orderId, MenuItem selectedMenuItem, int quantity);
+        void Checkout(Order orderToClose);
+
     }
 }
