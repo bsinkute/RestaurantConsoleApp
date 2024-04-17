@@ -62,7 +62,7 @@ namespace RestaurantSystem.Windows
                         {
                             Console.WriteLine(menuItem);
                         }
-                        Console.ReadLine();
+
                         Console.Write("Enter the Id of the menu item to add: ");
   
                         if (int.TryParse(Console.ReadLine(), out int menuItemId))

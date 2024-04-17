@@ -10,6 +10,8 @@ namespace RestaurantSystem
     {
         static void Main(string[] args)
         {
+            Console.InputEncoding = System.Text.Encoding.UTF8;
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             IDataService<List<Order>> orderDataService = new DataService<List<Order>> { FileName = "Orders.json" };
             IDataService<List<Table>> tableDataService = new DataService<List<Table>> { FileName = "Tables.json" };
             IDataService<List<Employee>> employeeDataService = new DataService<List<Employee>> { FileName = "Employees.json" };

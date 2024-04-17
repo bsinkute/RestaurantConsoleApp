@@ -17,7 +17,7 @@
 
         public override string ToString()
         {
-            return $"Id: {Id}, Name: {Name}, Price: {Price}";
+            return $"Id: {Id}, Name: {Name}, Price: {Price:N} €";
         }
 
         public int CompareTo(MenuItem? other)
