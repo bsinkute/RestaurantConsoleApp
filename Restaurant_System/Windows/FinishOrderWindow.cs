@@ -23,7 +23,7 @@ namespace RestaurantSystem.Windows
             {
                 foreach (Order order in activeOrders)
                 {
-                    Console.WriteLine($"Order ID: {order.OrderId} | Table: {order.TableId} | Guests: {order.NumberOfPeople} | Date: {DateTime.Now}");
+                    Console.WriteLine($"Order ID: {order.OrderId} | Table: {order.TableId} | Guests: {order.NumberOfPeople} | Date: {order.Checkin}");
                 }
 
                 Console.WriteLine();

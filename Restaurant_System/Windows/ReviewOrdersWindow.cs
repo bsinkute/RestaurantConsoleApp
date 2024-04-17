@@ -18,7 +18,7 @@ namespace RestaurantSystem.Windows
             Console.WriteLine("Active Orders:");
             foreach (Order order in activeOrders)
             {
-                Console.WriteLine($"Order ID: {order.OrderId} | Table: {order.TableId} | Guests: {order.NumberOfPeople} | Date: {DateTime.Now}");
+                Console.WriteLine($"Order ID: {order.OrderId} | Table: {order.TableId} | Guests: {order.NumberOfPeople} | Date: {order.Checkin}");
             }
 
             Console.Write("Enter the Order ID to review details (or '0' to exit): ");
