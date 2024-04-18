@@ -1,6 +1,5 @@
 ﻿using RestaurantSystem.Interfaces;
 using RestaurantSystem.Models;
-using RestaurantSystem.Services;
 
 namespace RestaurantSystem.Windows
 {
@@ -8,11 +7,13 @@ namespace RestaurantSystem.Windows
     {
         private readonly IOrderService _orderService;
         private readonly ITableService _tableService;
+        private readonly IReceiptService _receiptService;
 
-        public FinishOrderWindow(IOrderService orderService, ITableService tableService)
+        public FinishOrderWindow(IOrderService orderService, ITableService tableService, IReceiptService receiptService)
         {
             _orderService = orderService;
             _tableService = tableService;
+            _receiptService = receiptService;
         }
 
         public void Load(Employee employee)
@@ -58,6 +59,8 @@ namespace RestaurantSystem.Windows
                     _tableService.SaveTables(tables);
                 }
 
+                string restaurantReceipt = _receiptService.GetReceipt(orderToClose, true);
+                Console.WriteLine(restaurantReceipt);
                 Console.ReadLine();
             }
         }

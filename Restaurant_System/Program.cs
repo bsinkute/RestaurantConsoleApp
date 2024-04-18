@@ -23,12 +23,13 @@ namespace RestaurantSystem
             ITableService tableService = new TableService(tableDataService);
             IEmployeeService employeeService = new EmployeeService(employeeDataService);
             IMenuService menuService = new MenuService(dishDataService, drinkDataService);
+            IReceiptService receiptService = new ReceiptService();
 
             TakeOrderWindow takeOrderWindow = new TakeOrderWindow(tableService, orderService);
             AddMenuItemWindow addMenuItemWindow = new AddMenuItemWindow(menuService);
             ReviewOrdersWindow reviewOrdersWindow = new ReviewOrdersWindow(tableService, orderService, menuService);
             DailyStatisticsWindow dailyStatisticsWindow = new DailyStatisticsWindow();
-            FinishOrderWindow finishOrderWindow = new FinishOrderWindow(orderService, tableService);
+            FinishOrderWindow finishOrderWindow = new FinishOrderWindow(orderService, tableService, receiptService);
             EmployeeWindow employeeWindow = new EmployeeWindow(takeOrderWindow, addMenuItemWindow, reviewOrdersWindow, dailyStatisticsWindow, finishOrderWindow);
             MainWindow mainWindow = new MainWindow(employeeWindow, employeeService);
 

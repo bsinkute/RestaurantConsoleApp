@@ -54,13 +54,17 @@ namespace RestaurantSystem.Services
                 Console.WriteLine($"Order with ID {orderId} not found.");
                 return;
             }
-            OrderItem orderItem = new OrderItem { OrderedItem = selectedMenuItem, Quantity = quantity };
 
-            if (orderToUpdate.Items.Any(x => x.OrderedItem.Id != selectedMenuItem.Id))
+            if (orderToUpdate.Items.Any(item => item.OrderedItem.Id == selectedMenuItem.Id))
             {
+                int itemIndex = orderToUpdate.Items.FindIndex(item => item.OrderedItem.Id == selectedMenuItem.Id);
+                orderToUpdate.Items[itemIndex].Quantity += quantity;
+            }
+            else
+            {
+                OrderItem orderItem = new OrderItem { OrderedItem = selectedMenuItem, Quantity = quantity };
                 orderToUpdate.Items.Add(orderItem);
             }
-
 
             _orderDataService.WriteJson(orders);
             Console.WriteLine($"{selectedMenuItem.Name} added to Order ID {orderId}.");
