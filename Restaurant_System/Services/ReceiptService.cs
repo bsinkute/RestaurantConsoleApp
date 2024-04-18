@@ -1,4 +1,5 @@
-﻿using RestaurantSystem.Interfaces;
+﻿using RestaurantSystem.Infrastructure;
+using RestaurantSystem.Interfaces;
 using RestaurantSystem.Models;
 using System.Text;
 
@@ -6,6 +7,12 @@ namespace RestaurantSystem.Services
 {
     public class ReceiptService : IReceiptService
     {
+        private readonly IDataService<List<string>> _receiptDataService;
+        public ReceiptService(IDataService<List<string>> receiptDataService)
+        {
+            _receiptDataService = receiptDataService;
+        }
+
         public string GetReceipt(Order order, bool isRestaurantReceipt)
         {
             if (order == null)
@@ -14,8 +21,8 @@ namespace RestaurantSystem.Services
             }
 
             StringBuilder receiptBuilder = new StringBuilder();
-
-            receiptBuilder.AppendLine("========== Order Receipt ==========");
+            string receiptType = isRestaurantReceipt ? "Restaurant" : "Customer";
+            receiptBuilder.AppendLine($"========== {receiptType} Receipt ==========");
             receiptBuilder.AppendLine($"Order ID: {order.OrderId}");
             receiptBuilder.AppendLine($"Employee ID: {order.EmployeeId}");
 
@@ -36,9 +43,16 @@ namespace RestaurantSystem.Services
             receiptBuilder.AppendLine($"Price with VAT: {order.TotalAmountVatIncluded():N} €");
             receiptBuilder.AppendLine($"Price without VAT: {order.TotalAmountWithoutVat():N} €");
             receiptBuilder.AppendLine($"VAT (21%): {order.VatAmount():N} €");
-            receiptBuilder.AppendLine("===================================");
+            receiptBuilder.AppendLine("========================================");
 
             return receiptBuilder.ToString();
+        }
+
+        private void UpdateReceipts(string receipt)
+        {
+            List<string> receipts = _receiptDataService.ReadJson() ?? new List<string>();
+            receipts.Add(receipt);
+            _receiptDataService.WriteJson(receipts);
         }
     }
 }

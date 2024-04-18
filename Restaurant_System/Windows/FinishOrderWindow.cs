@@ -51,6 +51,14 @@ namespace RestaurantSystem.Windows
 
                 _orderService.Checkout(orderToClose);
 
+                Console.WriteLine("Do you want a receipt? (yes/no)");
+                string addAnotherInput = Console.ReadLine().ToLower();
+                bool userWantsReceipt = false;
+                if (addAnotherInput == "yes" || addAnotherInput == "y")
+                {
+                    userWantsReceipt = true;
+                }
+
                 List<Table> tables = _tableService.GetTables();
                 int tableIndex = tables.FindIndex(table => table.Id == orderToClose.TableId);
                 if (tableIndex != -1)
@@ -58,9 +66,14 @@ namespace RestaurantSystem.Windows
                     tables[tableIndex].FreeUp();
                     _tableService.SaveTables(tables);
                 }
-
+                if (userWantsReceipt)
+                {
+                    string customerReceipt = _receiptService.GetReceipt(orderToClose, false);
+                    Console.WriteLine(customerReceipt);
+                }
                 string restaurantReceipt = _receiptService.GetReceipt(orderToClose, true);
                 Console.WriteLine(restaurantReceipt);
+                _receiptService.AddReceipt(restaurantReceipt);
                 Console.ReadLine();
             }
         }

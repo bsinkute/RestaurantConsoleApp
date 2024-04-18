@@ -18,12 +18,13 @@ namespace RestaurantSystem
             IDataService<List<Employee>> employeeDataService = new DataService<List<Employee>> { FileName = "Employees.json" };
             IDataService<List<Dish>> dishDataService = new DataService<List<Dish>> { FileName = "Dishes.json"};
             IDataService<List<Drink>> drinkDataService = new DataService<List<Drink>> { FileName = "Drinks.json" };
+            IDataService<List<string>> receiptDataService = new DataService<List<string>> { FileName = "RestaurantReceipts.json" };
 
             IOrderService orderService = new OrderService(orderDataService);
             ITableService tableService = new TableService(tableDataService);
             IEmployeeService employeeService = new EmployeeService(employeeDataService);
             IMenuService menuService = new MenuService(dishDataService, drinkDataService);
-            IReceiptService receiptService = new ReceiptService();
+            IReceiptService receiptService = new ReceiptService(receiptDataService);
 
             TakeOrderWindow takeOrderWindow = new TakeOrderWindow(tableService, orderService);
             AddMenuItemWindow addMenuItemWindow = new AddMenuItemWindow(menuService);
