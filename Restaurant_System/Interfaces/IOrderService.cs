@@ -10,6 +10,6 @@ namespace RestaurantSystem.Interfaces
         List<Order> GetEmployeeOrders(int employeeId);
         void AddMenuItemToOrder(int orderId, MenuItem selectedMenuItem, int quantity);
         void Checkout(Order orderToClose);
-
+        List<Order> GetDayOrders(DateTime date);
     }
 }

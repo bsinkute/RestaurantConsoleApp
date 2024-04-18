@@ -94,5 +94,11 @@ namespace RestaurantSystem.Services
                 _orderDataService.WriteJson(orders);
             }
         }
+
+        public List<Order> GetDayOrders(DateTime date)
+        {
+            return GetOrders().Where(order => order.Checkout.Date == date.Date)
+                .ToList();
+        }
     }
 }
