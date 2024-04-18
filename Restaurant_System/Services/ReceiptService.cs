@@ -48,7 +48,7 @@ namespace RestaurantSystem.Services
             return receiptBuilder.ToString();
         }
 
-        private void UpdateReceipts(string receipt)
+        public void AddReceipt(string receipt)
         {
             List<string> receipts = _receiptDataService.ReadJson() ?? new List<string>();
             receipts.Add(receipt);
