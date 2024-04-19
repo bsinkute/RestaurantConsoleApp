@@ -20,10 +20,16 @@ namespace RestaurantSystem.Windows
             Console.Clear();
             List<Order> dailyOrders = _orderService.GetDayOrders(DateTime.Now);
             Console.WriteLine("Revenue: ");
-            Console.WriteLine($"With VAT: {_statisticService.GetTotalRevenueWithVat(dailyOrders)} €");
+            Console.WriteLine($"With VAT: {_statisticService.GetTotalRevenueWithVat(dailyOrders):N} €");
+            Console.WriteLine($"Without VAT: {_statisticService.GetTotalRevenueWithoutVat(dailyOrders):N} €");
+
+            Console.WriteLine($"Order when tables were not full: {_statisticService.TimesTablesNotFull(dailyOrders)}/{dailyOrders.Count}");
+            
+            int totalCustomers = _statisticService.GetTotalCustomers(dailyOrders);
+            int totalSeats = _statisticService.GetTotalSeats(dailyOrders);
+            Console.WriteLine($"Total customers / seats: {totalCustomers}/{totalSeats}");
 
             var addedProducts = _statisticService.GetAddedProduct(DateTime.Now);
-
             Console.WriteLine("Today's Added Menu Items:");
             foreach (var product in addedProducts)
             {

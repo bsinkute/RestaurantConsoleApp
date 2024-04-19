@@ -1,6 +1,5 @@
 ﻿using RestaurantSystem.Interfaces;
 using RestaurantSystem.Models;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace RestaurantSystem.Services
 {
@@ -30,6 +29,36 @@ namespace RestaurantSystem.Services
             }
 
             return orders.Sum(x => x.TotalAmountWithoutVat());
+        }
+
+        public int TimesTablesNotFull(List<Order> orders)
+        {
+            if (orders == null)
+            {
+                throw new ArgumentNullException(nameof(orders), "Orders list cannot be null.");
+            }
+
+            return orders.Where(x => x.NumberOfPeople < x.TableNumberOfSeats).Count();
+        }
+
+        public int GetTotalCustomers(List<Order> orders)
+        {
+            if (orders == null)
+            {
+                throw new ArgumentNullException(nameof(orders), "Orders list cannot be null.");
+            }
+
+            return orders.Sum(x => x.NumberOfPeople);
+        }
+
+        public int GetTotalSeats(List<Order> orders)
+        {
+            if (orders == null)
+            {
+                throw new ArgumentNullException(nameof(orders), "Orders list cannot be null.");
+            }
+
+            return orders.Sum(x => x.TableNumberOfSeats);
         }
 
         public List<MenuItem> GetAddedProduct(DateTime date)
