@@ -25,7 +25,7 @@ namespace RestaurantSystem
             IEmployeeService employeeService = new EmployeeService(employeeDataService);
             IMenuService menuService = new MenuService(dishDataService, drinkDataService);
             IReceiptService receiptService = new ReceiptService(receiptDataService);
-            IStatisticService statisticService = new StatisticService();
+            IStatisticService statisticService = new StatisticService(menuService);
 
             TakeOrderWindow takeOrderWindow = new TakeOrderWindow(tableService, orderService);
             AddMenuItemWindow addMenuItemWindow = new AddMenuItemWindow(menuService);

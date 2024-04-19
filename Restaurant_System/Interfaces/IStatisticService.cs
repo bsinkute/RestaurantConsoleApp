@@ -6,5 +6,6 @@ namespace RestaurantSystem.Interfaces
     {
         decimal GetTotalRevenueWithVat(List<Order> orders);
         decimal GetTotalRevenueWithoutVat(List<Order> orders);
+        List<MenuItem> GetAddedProduct(DateTime date);
     }
 }
