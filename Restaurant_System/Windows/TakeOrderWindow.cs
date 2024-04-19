@@ -19,7 +19,7 @@ namespace RestaurantSystem.Windows
             Console.Clear();
             Console.Write("How many guests should be seated? ");
             bool isCorectNumber = int.TryParse(Console.ReadLine(), out int numberOfPeople);
-            bool haveFittingTables = tables.Any(table => table.NumberOfSeats >= numberOfPeople);
+            bool haveFittingTables = tables.Any(table => table.NumberOfSeats >= numberOfPeople && table.IsFree());
 
             while (!isCorectNumber || numberOfPeople < 1 || !haveFittingTables)
             {
@@ -92,8 +92,6 @@ namespace RestaurantSystem.Windows
                 Console.WriteLine(table);
             }
             Console.ReadLine();
-            
         }
-
     }
 }
