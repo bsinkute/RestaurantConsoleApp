@@ -42,6 +42,7 @@ namespace RestaurantSystem.Windows
             {
                 if (orderId == 0)
                 {
+                    ConsoleHelper.GoBack();
                     return;
                 }
 
@@ -50,46 +51,42 @@ namespace RestaurantSystem.Windows
                 isValidNumber = int.TryParse(input, out orderId);
             }
 
-
-            if (orderId != 0)
+            Order selectedOrder = activeOrders.FirstOrDefault(o => o.OrderId == orderId);
+            Console.Clear();
+            Console.WriteLine($"Order Details for Order ID: {selectedOrder.OrderId}");
+            Console.WriteLine($"Table: {selectedOrder.TableId}");
+            Console.WriteLine($"Number of Guests: {selectedOrder.NumberOfPeople}");
+            Console.WriteLine("Ordered Items:");
+            if (selectedOrder.Items.Count == 0)
             {
-                Order selectedOrder = activeOrders.FirstOrDefault(o => o.OrderId == orderId);
-                Console.Clear();
-                Console.WriteLine($"Order Details for Order ID: {selectedOrder.OrderId}");
-                Console.WriteLine($"Table: {selectedOrder.TableId}");
-                Console.WriteLine($"Number of Guests: {selectedOrder.NumberOfPeople}");
-                Console.WriteLine("Ordered Items:");
-                if ( selectedOrder.Items.Count == 0 )
-                {
-                    Console.WriteLine("No items added yet.");
-                }
-                else
-                {
-                    Console.WriteLine(selectedOrder);
-                }
+                Console.WriteLine("No items added yet.");
+            }
+            else
+            {
+                Console.WriteLine(selectedOrder);
+            }
 
-                Console.WriteLine("Options:");
-                Console.WriteLine("1. Ordered dish or drink");
-                Console.WriteLine("2. Exit");
+            Console.WriteLine("Options:");
+            Console.WriteLine("1. Ordered dish or drink");
+            Console.WriteLine("2. Exit");
 
-                Console.Write("Select an option: ");
-                string option = Console.ReadLine();
+            Console.Write("Select an option: ");
+            string option = Console.ReadLine();
 
-                switch (option)
-                {
-                    case "1":
-                        foreach (MenuItem menuItem in _menuService.GetMenu().Items)
-                        {
-                            Console.WriteLine(menuItem);
-                        }
-                        OrderItem(selectedOrder);
-                        break;
-                    case "2":
-                        return;
-                    default:
-                        Console.WriteLine("Invalid option. Please try again.");
-                        break;
-                }
+            switch (option)
+            {
+                case "1":
+                    foreach (MenuItem menuItem in _menuService.GetMenu().Items)
+                    {
+                        Console.WriteLine(menuItem);
+                    }
+                    OrderItem(selectedOrder);
+                    break;
+                case "2":
+                    return;
+                default:
+                    Console.WriteLine("Invalid option. Please try again.");
+                    break;
             }
         }
 
