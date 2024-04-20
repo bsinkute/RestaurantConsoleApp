@@ -1,4 +1,5 @@
-﻿using RestaurantSystem.Interfaces;
+﻿using RestaurantSystem.Helpers;
+using RestaurantSystem.Interfaces;
 using RestaurantSystem.Models;
 using RestaurantSystem.Services;
 
@@ -55,11 +56,11 @@ namespace RestaurantSystem.Windows
 
                 _menuService.AddMenuItem(menuItem);
 
-                Console.WriteLine("Do you want to add another item? (yes/no)");
-                string addAnotherInput = Console.ReadLine().ToLower();
-
-                if (addAnotherInput != "yes" && addAnotherInput != "y")
+                Console.Write("Do you want to add another item? (yes/no): ");
+                if (!ConsoleHelper.YesOrNoInput())
+                {
                     break;
+                }
             }
 
             Console.Clear();
@@ -68,8 +69,7 @@ namespace RestaurantSystem.Windows
             {
                 Console.WriteLine(menuItem);
             }
-            Console.Write("Press any key to go back to employee menu. ");
-            Console.ReadKey();
+            ConsoleHelper.GoBack();
         }
     }
 }

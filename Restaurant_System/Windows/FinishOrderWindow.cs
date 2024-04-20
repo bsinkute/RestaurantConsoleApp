@@ -1,4 +1,5 @@
-﻿using RestaurantSystem.Interfaces;
+﻿using RestaurantSystem.Helpers;
+using RestaurantSystem.Interfaces;
 using RestaurantSystem.Models;
 
 namespace RestaurantSystem.Windows
@@ -60,29 +61,20 @@ namespace RestaurantSystem.Windows
                 if (orderToClose.Items.Count > 0)
                 {
                     Console.WriteLine($"Order ID {orderToClose.OrderId} successfully closed.");
-                    Console.WriteLine("Does the customer want a receipt? (yes/no)");
-                    string addAnotherInput = Console.ReadLine().ToLower();
-                    bool userWantsReceipt = false;
-                    if (addAnotherInput == "yes" || addAnotherInput == "y")
-                    {
-                        userWantsReceipt = true;
-                    }
+                    Console.Write("Does the customer want a receipt? (yes/no): ");
+                    bool userWantsReceipt = ConsoleHelper.YesOrNoInput();
                     PrintReceipts(orderToClose, userWantsReceipt);
                 }
                 else
                 {
                     Console.WriteLine("Empty order was closed. Receipt will not be printed.");
                 }
-                
-                Console.Write("Press any key to go back to employee menu. ");
-                Console.ReadKey();
             }
             else
             {
                 Console.WriteLine("No active orders to finish.");
-                Console.Write("Press any key to go back to employee menu. ");
-                Console.ReadKey();
             }
+            ConsoleHelper.GoBack();
         }
 
         private void PrintReceipts(Order orderToClose, bool userWantsReceipt)

@@ -1,14 +1,19 @@
-﻿using RestaurantSystem.Interfaces;
+﻿using RestaurantSystem.Helpers;
+using RestaurantSystem.Interfaces;
 using RestaurantSystem.Models;
-using RestaurantSystem.Services;
 
 namespace RestaurantSystem.Windows
 {
-    public class ReviewOrdersWindow(ITableService tableService, IOrderService orderService, IMenuService menuService)
+    public class ReviewOrdersWindow
     {
-        private readonly ITableService _tableService = tableService;
-        private readonly IOrderService _orderService = orderService;
-        private readonly IMenuService _menuService = menuService;
+        private readonly IOrderService _orderService;
+        private readonly IMenuService _menuService;
+
+        public ReviewOrdersWindow(IOrderService orderService, IMenuService menuService)
+        {
+            _orderService = orderService;
+            _menuService = menuService;
+        }
 
         public void Load(Employee employee)
         {
@@ -73,13 +78,11 @@ namespace RestaurantSystem.Windows
                         break;
                     case "2":
                         return;
-
                     default:
                         Console.WriteLine("Invalid option. Please try again.");
                         break;
                 }
             }
-
         }
 
         private void OrderItem(Order selectedOrder)
@@ -111,14 +114,12 @@ namespace RestaurantSystem.Windows
                 Console.WriteLine("Invalid input.");
             }
 
-            Console.WriteLine("Do you want to add another item? (yes/no)");
-            string addAnotherInput = Console.ReadLine().ToLower();
-
-            if (addAnotherInput != "yes" && addAnotherInput != "y")
-                return;
-
-            OrderItem(selectedOrder);
+            Console.WriteLine("Do you want to add another item? (yes/no): ");
+            bool addAnotherInput = ConsoleHelper.YesOrNoInput();
+            if(addAnotherInput)
+            {
+                OrderItem(selectedOrder);
+            }
         }
-
     }
 }

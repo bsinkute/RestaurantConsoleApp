@@ -1,7 +1,6 @@
-﻿using RestaurantSystem.Interfaces;
+﻿using RestaurantSystem.Helpers;
+using RestaurantSystem.Interfaces;
 using RestaurantSystem.Models;
-using System.Diagnostics;
-using System.Xml.Linq;
 
 namespace RestaurantSystem.Windows
 {
@@ -35,7 +34,7 @@ namespace RestaurantSystem.Windows
             {
                 Console.WriteLine($"- Name: {product.Name}, Price: {product.Price:N} €");
             }
-            Console.ReadLine();
+            ConsoleHelper.GoBack();
         }
 
     }

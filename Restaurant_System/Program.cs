@@ -29,7 +29,7 @@ namespace RestaurantSystem
 
             TakeOrderWindow takeOrderWindow = new TakeOrderWindow(tableService, orderService);
             AddMenuItemWindow addMenuItemWindow = new AddMenuItemWindow(menuService);
-            ReviewOrdersWindow reviewOrdersWindow = new ReviewOrdersWindow(tableService, orderService, menuService);
+            ReviewOrdersWindow reviewOrdersWindow = new ReviewOrdersWindow(orderService, menuService);
             DailyStatisticsWindow dailyStatisticsWindow = new DailyStatisticsWindow(statisticService, orderService);
             FinishOrderWindow finishOrderWindow = new FinishOrderWindow(orderService, tableService, receiptService);
             EmployeeWindow employeeWindow = new EmployeeWindow(takeOrderWindow, addMenuItemWindow, reviewOrdersWindow, dailyStatisticsWindow, finishOrderWindow);

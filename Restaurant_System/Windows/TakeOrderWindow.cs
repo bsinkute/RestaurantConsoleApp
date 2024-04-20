@@ -1,4 +1,5 @@
-﻿using RestaurantSystem.Interfaces;
+﻿using RestaurantSystem.Helpers;
+using RestaurantSystem.Interfaces;
 using RestaurantSystem.Models;
 
 namespace RestaurantSystem.Windows
@@ -92,8 +93,7 @@ namespace RestaurantSystem.Windows
                 Console.WriteLine(table);
             }
 
-            Console.Write("Press any key to go back to employee menu. ");
-            Console.ReadKey();
+            ConsoleHelper.GoBack();
         }
     }
 }
