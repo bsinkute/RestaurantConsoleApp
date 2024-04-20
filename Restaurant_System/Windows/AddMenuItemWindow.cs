@@ -62,14 +62,14 @@ namespace RestaurantSystem.Windows
                     break;
             }
 
-
-
+            Console.Clear();
             Console.WriteLine("Updated menu:");
             foreach (MenuItem menuItem in _menuService.GetMenu().Items)
             {
                 Console.WriteLine(menuItem);
             }
-            Console.ReadLine();
+            Console.Write("Press any key to go back to employee menu. ");
+            Console.ReadKey();
         }
     }
 }

@@ -50,15 +50,6 @@ namespace RestaurantSystem.Windows
                 }
 
                 _orderService.Checkout(orderToClose);
-
-                Console.WriteLine("Do you want a receipt? (yes/no)");
-                string addAnotherInput = Console.ReadLine().ToLower();
-                bool userWantsReceipt = false;
-                if (addAnotherInput == "yes" || addAnotherInput == "y")
-                {
-                    userWantsReceipt = true;
-                }
-
                 List<Table> tables = _tableService.GetTables();
                 int tableIndex = tables.FindIndex(table => table.Id == orderToClose.TableId);
                 if (tableIndex != -1)
@@ -66,16 +57,44 @@ namespace RestaurantSystem.Windows
                     tables[tableIndex].FreeUp();
                     _tableService.SaveTables(tables);
                 }
-                if (userWantsReceipt)
+                if (orderToClose.Items.Count > 0)
                 {
-                    string customerReceipt = _receiptService.GetReceipt(orderToClose, false);
-                    Console.WriteLine(customerReceipt);
+                    Console.WriteLine($"Order ID {orderToClose.OrderId} successfully closed.");
+                    Console.WriteLine("Does the customer want a receipt? (yes/no)");
+                    string addAnotherInput = Console.ReadLine().ToLower();
+                    bool userWantsReceipt = false;
+                    if (addAnotherInput == "yes" || addAnotherInput == "y")
+                    {
+                        userWantsReceipt = true;
+                    }
+                    PrintReceipts(orderToClose, userWantsReceipt);
                 }
-                string restaurantReceipt = _receiptService.GetReceipt(orderToClose, true);
-                Console.WriteLine(restaurantReceipt);
-                _receiptService.AddReceipt(restaurantReceipt);
-                Console.ReadLine();
+                else
+                {
+                    Console.WriteLine("Empty order was closed. Receipt will not be printed.");
+                }
+                
+                Console.Write("Press any key to go back to employee menu. ");
+                Console.ReadKey();
             }
+            else
+            {
+                Console.WriteLine("No active orders to finish.");
+                Console.Write("Press any key to go back to employee menu. ");
+                Console.ReadKey();
+            }
+        }
+
+        private void PrintReceipts(Order orderToClose, bool userWantsReceipt)
+        {
+            if (userWantsReceipt)
+            {
+                string customerReceipt = _receiptService.GetReceipt(orderToClose, false);
+                Console.WriteLine(customerReceipt);
+            }
+            string restaurantReceipt = _receiptService.GetReceipt(orderToClose, true);
+            Console.WriteLine(restaurantReceipt);
+            _receiptService.AddReceipt(restaurantReceipt);
         }
     }
 }

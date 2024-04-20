@@ -80,8 +80,6 @@ namespace RestaurantSystem.Services
             orderToClose.Checkout = DateTime.Now;
 
             UpdateOrder(orderToClose);
-
-            Console.WriteLine($"Order ID {orderToClose.OrderId} successfully closed.");
         }
 
         private void UpdateOrder(Order order)

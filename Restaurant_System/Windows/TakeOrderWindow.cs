@@ -91,7 +91,9 @@ namespace RestaurantSystem.Windows
             {
                 Console.WriteLine(table);
             }
-            Console.ReadLine();
+
+            Console.Write("Press any key to go back to employee menu. ");
+            Console.ReadKey();
         }
     }
 }

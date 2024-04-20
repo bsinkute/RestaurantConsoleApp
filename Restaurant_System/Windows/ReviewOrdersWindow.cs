@@ -46,7 +46,14 @@ namespace RestaurantSystem.Windows
                 Console.WriteLine($"Table: {selectedOrder.TableId}");
                 Console.WriteLine($"Number of Guests: {selectedOrder.NumberOfPeople}");
                 Console.WriteLine("Ordered Items:");
-                Console.WriteLine(selectedOrder);
+                if ( selectedOrder.Items.Count == 0 )
+                {
+                    Console.WriteLine("No items added yet.");
+                }
+                else
+                {
+                    Console.WriteLine(selectedOrder);
+                }
 
                 Console.WriteLine("Options:");
                 Console.WriteLine("1. Ordered dish or drink");
@@ -62,35 +69,8 @@ namespace RestaurantSystem.Windows
                         {
                             Console.WriteLine(menuItem);
                         }
-
-                        Console.Write("Enter the Id of the menu item to add: ");
-  
-                        if (int.TryParse(Console.ReadLine(), out int menuItemId))
-                        {
-                            MenuItem selectedMenuItem = _menuService.GetMenuItemById(menuItemId);
-                            if (selectedMenuItem != null)
-                            {
-                                Console.Write("Enter the quantity to add: ");
-                                if (int.TryParse(Console.ReadLine(), out int quantity) && quantity > 0)
-                                {
-                                    _orderService.AddMenuItemToOrder(selectedOrder.OrderId, selectedMenuItem, quantity);
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Invalid quantity. Quantity must be a positive integer.");
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Invalid menu item ID.");
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid input.");
-                        }
+                        OrderItem(selectedOrder);
                         break;
-
                     case "2":
                         return;
 
@@ -102,6 +82,43 @@ namespace RestaurantSystem.Windows
 
         }
 
-        
+        private void OrderItem(Order selectedOrder)
+        {
+            Console.Write("Enter the Id of the menu item to add: ");
+
+            if (int.TryParse(Console.ReadLine(), out int menuItemId))
+            {
+                MenuItem selectedMenuItem = _menuService.GetMenuItemById(menuItemId);
+                if (selectedMenuItem != null)
+                {
+                    Console.Write("Enter the quantity to add: ");
+                    if (int.TryParse(Console.ReadLine(), out int quantity) && quantity > 0)
+                    {
+                        _orderService.AddMenuItemToOrder(selectedOrder.OrderId, selectedMenuItem, quantity);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid quantity. Quantity must be a positive integer.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid menu item ID.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input.");
+            }
+
+            Console.WriteLine("Do you want to add another item? (yes/no)");
+            string addAnotherInput = Console.ReadLine().ToLower();
+
+            if (addAnotherInput != "yes" && addAnotherInput != "y")
+                return;
+
+            OrderItem(selectedOrder);
+        }
+
     }
 }
