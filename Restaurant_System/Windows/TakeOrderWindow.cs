@@ -18,11 +18,11 @@ namespace RestaurantSystem.Windows
         {
             List<Table> tables = _tableService.GetTables();
             Console.Clear();
-            Console.Write("How many guests should be seated? ");
+            Console.Write("How many guests should be seated? (or '0' to exit): ");
             bool isCorectNumber = int.TryParse(Console.ReadLine(), out int numberOfPeople);
             bool haveFittingTables = tables.Any(table => table.NumberOfSeats >= numberOfPeople && table.IsFree());
 
-            while (!isCorectNumber || numberOfPeople < 1 || !haveFittingTables)
+            while (!isCorectNumber || numberOfPeople < 0 || !haveFittingTables)
             {
                 if (!haveFittingTables)
                 {
@@ -34,12 +34,18 @@ namespace RestaurantSystem.Windows
                 isCorectNumber = int.TryParse(Console.ReadLine(), out numberOfPeople);
             }
 
+            if (numberOfPeople == 0)
+            {
+                ConsoleHelper.GoBack();
+                return;
+            }
+
             Console.WriteLine("Tables:");
             foreach (Table table in tables)
             {
                 Console.WriteLine(table);
             }
-            Console.Write("Enter the Id of the table at which you want customers to sit: ");
+            Console.Write("Enter the Id of the table at which you want customers to sit (or '0' to exit): ");
             string input = Console.ReadLine();
             bool isValidNumber = int.TryParse(input, out int tableId);
             bool tableExists = tables.Any(table => table.Id == tableId);
@@ -51,6 +57,11 @@ namespace RestaurantSystem.Windows
                 if (!isValidNumber)
                 {
                     Console.Write("Invalid input. Please enter a valid table Id: ");
+                }
+                else if (tableId == 0)
+                {
+                    ConsoleHelper.GoBack();
+                    return;
                 }
                 else if (!tableExists)
                 {
@@ -70,6 +81,7 @@ namespace RestaurantSystem.Windows
                 enoughSpace = tables.Any(table => table.Id == tableId && table.NumberOfSeats >= numberOfPeople);
                 isTableFree = tables.Any(table => table.Id == tableId && table.IsFree());
             }
+
             Table selectedTable = tables.FirstOrDefault(t => t.Id == tableId);
             Console.WriteLine($"Table {tableId} selected. Number of seats: {selectedTable.NumberOfSeats}");
 

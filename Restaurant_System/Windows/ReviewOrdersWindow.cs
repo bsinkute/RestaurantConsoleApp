@@ -21,6 +21,14 @@ namespace RestaurantSystem.Windows
 
             Console.Clear();
             Console.WriteLine("Active Orders:");
+
+            if (activeOrders.Count == 0) 
+            {
+                Console.WriteLine("No active orders.");
+                ConsoleHelper.GoBack();
+                return;
+            }
+
             foreach (Order order in activeOrders)
             {
                 Console.WriteLine($"Order ID: {order.OrderId} | Table: {order.TableId} | Guests: {order.NumberOfPeople} | Date: {order.Checkin}");
