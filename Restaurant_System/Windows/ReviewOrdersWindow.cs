@@ -18,17 +18,16 @@ namespace RestaurantSystem.Windows
         public void Load(Employee employee)
         {
             List<Order> activeOrders = _orderService.GetEmployeeOrders(employee.Id);
-
             Console.Clear();
-            Console.WriteLine("Active Orders:");
 
-            if (activeOrders.Count == 0) 
+            if (activeOrders.Count == 0)
             {
                 Console.WriteLine("No active orders.");
                 ConsoleHelper.GoBack();
                 return;
             }
 
+            Console.WriteLine("Active Orders:");
             foreach (Order order in activeOrders)
             {
                 Console.WriteLine($"Order ID: {order.OrderId} | Table: {order.TableId} | Guests: {order.NumberOfPeople} | Date: {order.Checkin}");
@@ -52,19 +51,7 @@ namespace RestaurantSystem.Windows
             }
 
             Order selectedOrder = activeOrders.FirstOrDefault(o => o.OrderId == orderId);
-            Console.Clear();
-            Console.WriteLine($"Order Details for Order ID: {selectedOrder.OrderId}");
-            Console.WriteLine($"Table: {selectedOrder.TableId}");
-            Console.WriteLine($"Number of Guests: {selectedOrder.NumberOfPeople}");
-            Console.WriteLine("Ordered Items:");
-            if (selectedOrder.Items.Count == 0)
-            {
-                Console.WriteLine("No items added yet.");
-            }
-            else
-            {
-                Console.WriteLine(selectedOrder);
-            }
+            PrintOrderDetails(selectedOrder);
 
             Console.WriteLine("Options:");
             Console.WriteLine("1. Ordered dish or drink");
@@ -87,6 +74,23 @@ namespace RestaurantSystem.Windows
                 default:
                     Console.WriteLine("Invalid option. Please try again.");
                     break;
+            }
+        }
+
+        private static void PrintOrderDetails(Order selectedOrder)
+        {
+            Console.Clear();
+            Console.WriteLine($"Order Details for Order ID: {selectedOrder.OrderId}");
+            Console.WriteLine($"Table: {selectedOrder.TableId}");
+            Console.WriteLine($"Number of Guests: {selectedOrder.NumberOfPeople}");
+            Console.WriteLine("Ordered Items:");
+            if (selectedOrder.Items.Count == 0)
+            {
+                Console.WriteLine("No items added yet.");
+            }
+            else
+            {
+                Console.WriteLine(selectedOrder);
             }
         }
 

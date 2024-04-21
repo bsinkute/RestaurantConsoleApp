@@ -51,31 +51,36 @@ namespace RestaurantSystem.Windows
                     return;
                 }
 
-                _orderService.Checkout(orderToClose);
-                List<Table> tables = _tableService.GetTables();
-                int tableIndex = tables.FindIndex(table => table.Id == orderToClose.TableId);
-                if (tableIndex != -1)
-                {
-                    tables[tableIndex].FreeUp();
-                    _tableService.SaveTables(tables);
-                }
-                if (orderToClose.Items.Count > 0)
-                {
-                    Console.WriteLine($"Order ID {orderToClose.OrderId} successfully closed.");
-                    Console.Write("Does the customer want a receipt? (yes/no): ");
-                    bool userWantsReceipt = ConsoleHelper.YesOrNoInput();
-                    PrintReceipts(orderToClose, userWantsReceipt);
-                }
-                else
-                {
-                    Console.WriteLine("Empty order was closed. Receipt will not be printed.");
-                }
+                CloseOrder(orderToClose);
             }
             else
             {
                 Console.WriteLine("No active orders to finish.");
             }
             ConsoleHelper.GoBack();
+        }
+
+        private void CloseOrder(Order orderToClose)
+        {
+            _orderService.Checkout(orderToClose);
+            List<Table> tables = _tableService.GetTables();
+            int tableIndex = tables.FindIndex(table => table.Id == orderToClose.TableId);
+            if (tableIndex != -1)
+            {
+                tables[tableIndex].FreeUp();
+                _tableService.SaveTables(tables);
+            }
+            if (orderToClose.Items.Count > 0)
+            {
+                Console.WriteLine($"Order ID {orderToClose.OrderId} successfully closed.");
+                Console.Write("Does the customer want a receipt? (yes/no): ");
+                bool userWantsReceipt = ConsoleHelper.YesOrNoInput();
+                PrintReceipts(orderToClose, userWantsReceipt);
+            }
+            else
+            {
+                Console.WriteLine("Empty order was closed. Receipt will not be printed.");
+            }
         }
 
         private void PrintReceipts(Order orderToClose, bool userWantsReceipt)

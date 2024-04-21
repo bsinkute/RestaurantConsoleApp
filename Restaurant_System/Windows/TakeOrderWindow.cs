@@ -83,6 +83,13 @@ namespace RestaurantSystem.Windows
             }
 
             Table selectedTable = tables.FirstOrDefault(t => t.Id == tableId);
+            SaveTableOrder(employee, tables, numberOfPeople, tableId, selectedTable);
+
+            ConsoleHelper.GoBack();
+        }
+
+        private void SaveTableOrder(Employee employee, List<Table> tables, int numberOfPeople, int tableId, Table selectedTable)
+        {
             Console.WriteLine($"Table {tableId} selected. Number of seats: {selectedTable.NumberOfSeats}");
 
             Order order = new Order
@@ -104,8 +111,6 @@ namespace RestaurantSystem.Windows
             {
                 Console.WriteLine(table);
             }
-
-            ConsoleHelper.GoBack();
         }
     }
 }

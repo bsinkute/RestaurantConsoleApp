@@ -13,10 +13,17 @@ namespace RestaurantSystem
             Console.InputEncoding = System.Text.Encoding.UTF8;
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
+            MainWindow mainWindow = RegisterServices();
+
+            mainWindow.Load();
+        }
+
+        private static MainWindow RegisterServices()
+        {
             IDataService<List<Order>> orderDataService = new DataService<List<Order>> { FileName = "Orders.json" };
             IDataService<List<Table>> tableDataService = new DataService<List<Table>> { FileName = "Tables.json" };
             IDataService<List<Employee>> employeeDataService = new DataService<List<Employee>> { FileName = "Employees.json" };
-            IDataService<List<Dish>> dishDataService = new DataService<List<Dish>> { FileName = "Dishes.json"};
+            IDataService<List<Dish>> dishDataService = new DataService<List<Dish>> { FileName = "Dishes.json" };
             IDataService<List<Drink>> drinkDataService = new DataService<List<Drink>> { FileName = "Drinks.json" };
             IDataService<List<string>> receiptDataService = new DataService<List<string>> { FileName = "RestaurantReceipts.json" };
 
@@ -34,8 +41,7 @@ namespace RestaurantSystem
             FinishOrderWindow finishOrderWindow = new FinishOrderWindow(orderService, tableService, receiptService);
             EmployeeWindow employeeWindow = new EmployeeWindow(takeOrderWindow, addMenuItemWindow, reviewOrdersWindow, dailyStatisticsWindow, finishOrderWindow);
             MainWindow mainWindow = new MainWindow(employeeWindow, employeeService);
-
-            mainWindow.Load();
+            return mainWindow;
         }
     }
 }

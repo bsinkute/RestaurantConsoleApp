@@ -1,7 +1,6 @@
 ﻿using RestaurantSystem.Helpers;
 using RestaurantSystem.Interfaces;
 using RestaurantSystem.Models;
-using RestaurantSystem.Services;
 
 namespace RestaurantSystem.Windows
 {
@@ -28,7 +27,8 @@ namespace RestaurantSystem.Windows
 
                 bool isChoiseCorrect = int.TryParse(Console.ReadLine(), out int choise);
                 while (!isChoiseCorrect || choise < 0 || choise > 2)
-                {                    Console.Write("Invalid type selection. Please try again: ");
+                {
+                    Console.Write("Invalid type selection. Please try again: ");
                     isChoiseCorrect = int.TryParse(Console.ReadLine(), out choise);
                 }
 
@@ -38,28 +38,7 @@ namespace RestaurantSystem.Windows
                     return;
                 }
 
-                Console.Write("Name: ");
-                string name = Console.ReadLine();
-                Console.Write("Price: ");
-
-                bool isPriceCorrect = decimal.TryParse(Console.ReadLine(), out decimal price);
-                while (!isPriceCorrect || price <= 0)
-                {
-                    Console.Write("Invalid Price format. Please try again: ");
-                    isPriceCorrect = decimal.TryParse(Console.ReadLine(), out price);
-                }
-
-                MenuItem menuItem;
-                if (choise == 1)
-                {
-                    menuItem = new Dish(1, name, price, DateTime.Now);
-                }
-                else
-                {
-                    menuItem = new Drink(1, name, price, DateTime.Now);
-                }
-
-                _menuService.AddMenuItem(menuItem);
+                CreateNewItem(choise);
 
                 Console.Write("Do you want to add another item? (yes/no): ");
                 if (!ConsoleHelper.YesOrNoInput())
@@ -75,6 +54,32 @@ namespace RestaurantSystem.Windows
                 Console.WriteLine(menuItem);
             }
             ConsoleHelper.GoBack();
+        }
+
+        private void CreateNewItem(int choise)
+        {
+            Console.Write("Name: ");
+            string name = Console.ReadLine();
+            Console.Write("Price: ");
+
+            bool isPriceCorrect = decimal.TryParse(Console.ReadLine(), out decimal price);
+            while (!isPriceCorrect || price <= 0)
+            {
+                Console.Write("Invalid Price format. Please try again: ");
+                isPriceCorrect = decimal.TryParse(Console.ReadLine(), out price);
+            }
+
+            MenuItem menuItem;
+            if (choise == 1)
+            {
+                menuItem = new Dish(1, name, price, DateTime.Now);
+            }
+            else
+            {
+                menuItem = new Drink(1, name, price, DateTime.Now);
+            }
+
+            _menuService.AddMenuItem(menuItem);
         }
     }
 }
