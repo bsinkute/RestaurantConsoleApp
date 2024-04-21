@@ -20,43 +20,42 @@ namespace RestaurantSystem.Windows
         public void Load(Employee employee)
         {
             Console.Clear();
-            Console.WriteLine("Active Orders:");
-
             List<Order> activeOrders = _orderService.GetEmployeeOrders(employee.Id);
 
-            if (activeOrders.Any())
-            {
-                foreach (Order order in activeOrders)
-                {
-                    Console.WriteLine($"Order ID: {order.OrderId} | Table: {order.TableId} | Guests: {order.NumberOfPeople} | Date: {order.Checkin}");
-                }
-
-                Console.WriteLine();
-                Console.Write("Enter the Order ID to close (or '0' to cancel): ");
-                string input = Console.ReadLine();
-                bool isValidNumber = int.TryParse(input, out int orderId);
-
-                if (orderId == 0)
-                {
-                    ConsoleHelper.GoBack();
-                    return;
-                }
-
-                Order orderToClose = activeOrders.FirstOrDefault(o => o.OrderId == orderId);
-
-                if (orderToClose == null)
-                {
-                    Console.WriteLine($"Order with ID {orderId} not found.");
-                    ConsoleHelper.GoBack();
-                    return;
-                }
-
-                CloseOrder(orderToClose);
-            }
-            else
+            if (!activeOrders.Any())
             {
                 Console.WriteLine("No active orders to finish.");
+                ConsoleHelper.GoBack();
+                return;
             }
+
+            Console.WriteLine("Active Orders:");
+            foreach (Order order in activeOrders)
+            {
+                Console.WriteLine($"Order ID: {order.OrderId} | Table: {order.TableId} | Guests: {order.NumberOfPeople} | Date: {order.Checkin}");
+            }
+
+            Console.WriteLine();
+            Console.Write("Enter the Order ID to close (or '0' to cancel): ");
+            string input = Console.ReadLine();
+            bool isValidNumber = int.TryParse(input, out int orderId);
+
+            if (orderId == 0)
+            {
+                ConsoleHelper.GoBack();
+                return;
+            }
+
+            Order orderToClose = activeOrders.FirstOrDefault(o => o.OrderId == orderId);
+
+            if (orderToClose == null)
+            {
+                Console.WriteLine($"Order with ID {orderId} not found.");
+                ConsoleHelper.GoBack();
+                return;
+            }
+
+            CloseOrder(orderToClose);
             ConsoleHelper.GoBack();
         }
 

@@ -43,32 +43,17 @@ namespace RestaurantSystem.Windows
 
         public void EmployeeLogin()
         {
-            List<Employee> employees = _employeeService.GetEmployees();
             Console.Clear();
-            Console.WriteLine("Employees list:");
-            foreach (Employee employee in employees)
+            Console.Write("Enter your password: ");
+            string password = Console.ReadLine();
+            Employee employee = _employeeService.Authenticate(password);
+            while (employee == null)
             {
-                Console.WriteLine(employee);
+                Console.Write("Incorrect password. Please try again: ");
+                password = Console.ReadLine();
+                employee = _employeeService.Authenticate(password);
             }
-            Console.Write("Enter your identification number: ");
-            bool isChoiseCorrect = int.TryParse(Console.ReadLine(), out int choise);
-            bool employeeExist = employees.Any(employees => employees.Id == choise);
-            while (!isChoiseCorrect || !employeeExist)
-            {
-                if (!isChoiseCorrect)
-                {
-                    Console.Write("Invalid input. Please enter a valid employee Id: ");
-                }
-                else if (!employeeExist)
-                {
-                    Console.Write($"Employee with Id {choise} does not exist. Enter a valid employee Id: ");
-                }
-                isChoiseCorrect = int.TryParse(Console.ReadLine(), out choise);
-                employeeExist = employees.Any(employees => employees.Id == choise);
-            }
-
-            Employee selectedEmployee = employees.FirstOrDefault(employee => employee.Id == choise);
-            _employeeWindow.Load(selectedEmployee);
+            _employeeWindow.Load(employee);
         }
     }
 }

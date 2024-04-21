@@ -14,7 +14,6 @@ namespace RestaurantSystem
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
             MainWindow mainWindow = RegisterServices();
-
             mainWindow.Load();
         }
 
