@@ -27,17 +27,20 @@ namespace RestaurantSystem.Services
 
             if (menuItem is Dish dish)
             {
-                List<Dish> dishes = _dishDataService.ReadJson() ?? new List<Dish>();
-                dishes.Add(dish);
-                _dishDataService.WriteJson(dishes);
+                SaveMenuItem(dish, _dishDataService);
             }
 
             if (menuItem is Drink drink)
             {
-                List<Drink> drinks = _drinkDataService.ReadJson() ?? new List<Drink>();
-                drinks.Add(drink);
-                _drinkDataService.WriteJson(drinks);
+                SaveMenuItem(drink, _drinkDataService);
             }
+        }
+
+        private void SaveMenuItem<T>(T menuItem, IDataService<List<T>> dataService) where T : MenuItem
+        {
+            List<T> items = dataService.ReadJson() ?? new List<T>();
+            items.Add(menuItem);
+            dataService.WriteJson(items);
         }
 
         public Menu GetMenu()

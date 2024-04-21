@@ -38,7 +38,7 @@ namespace RestaurantSystem.Windows
 
                 if (orderId == 0)
                 {
-                    Console.WriteLine("Closing operation canceled.");
+                    ConsoleHelper.GoBack();
                     return;
                 }
 
@@ -47,6 +47,7 @@ namespace RestaurantSystem.Windows
                 if (orderToClose == null)
                 {
                     Console.WriteLine($"Order with ID {orderId} not found.");
+                    ConsoleHelper.GoBack();
                     return;
                 }
 

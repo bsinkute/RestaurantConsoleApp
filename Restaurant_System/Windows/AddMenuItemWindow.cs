@@ -24,13 +24,18 @@ namespace RestaurantSystem.Windows
             while (true)
             {
                 Console.WriteLine("Add new menu item:");
-                Console.Write("Type '1' for Dish or '2' for Drink: ");
+                Console.Write("Type '1' for Dish or '2' for Drink (or '0' to cancel): ");
 
                 bool isChoiseCorrect = int.TryParse(Console.ReadLine(), out int choise);
-                while (!isChoiseCorrect || choise < 1 || choise > 2)
-                {
-                    Console.Write("Invalid type selection. Please try again: ");
+                while (!isChoiseCorrect || choise < 0 || choise > 2)
+                {                    Console.Write("Invalid type selection. Please try again: ");
                     isChoiseCorrect = int.TryParse(Console.ReadLine(), out choise);
+                }
+
+                if (choise == 0)
+                {
+                    ConsoleHelper.GoBack();
+                    return;
                 }
 
                 Console.Write("Name: ");
