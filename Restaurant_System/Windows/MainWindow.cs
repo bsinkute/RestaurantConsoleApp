@@ -1,4 +1,5 @@
-﻿using RestaurantSystem.Interfaces;
+﻿using RestaurantSystem.Helpers;
+using RestaurantSystem.Interfaces;
 using RestaurantSystem.Models;
 
 namespace RestaurantSystem.Windows
@@ -45,13 +46,11 @@ namespace RestaurantSystem.Windows
         {
             Console.Clear();
             Console.Write("Enter your password: ");
-            string password = Console.ReadLine();
-            Employee employee = _employeeService.Authenticate(password);
+            Employee employee = _employeeService.Authenticate(ConsoleHelper.ReadMaskedInput());
             while (employee == null)
             {
                 Console.Write("Incorrect password. Please try again: ");
-                password = Console.ReadLine();
-                employee = _employeeService.Authenticate(password);
+                employee = _employeeService.Authenticate(ConsoleHelper.ReadMaskedInput());
             }
             _employeeWindow.Load(employee);
         }
