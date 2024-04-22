@@ -33,10 +33,10 @@ namespace RestaurantSystem
             IReceiptService receiptService = new ReceiptService(receiptDataService);
             IStatisticService statisticService = new StatisticService(menuService);
 
-            TakeOrderWindow takeOrderWindow = new TakeOrderWindow(tableService, orderService);
+            TakeOrderWindow takeOrderWindow = new TakeOrderWindow(tableService, orderService, employeeService);
             AddMenuItemWindow addMenuItemWindow = new AddMenuItemWindow(menuService);
             ReviewOrdersWindow reviewOrdersWindow = new ReviewOrdersWindow(orderService, menuService);
-            DailyStatisticsWindow dailyStatisticsWindow = new DailyStatisticsWindow(statisticService, orderService);
+            DailyStatisticsWindow dailyStatisticsWindow = new DailyStatisticsWindow(statisticService, orderService, employeeService);
             FinishOrderWindow finishOrderWindow = new FinishOrderWindow(orderService, tableService, receiptService);
             EmployeeWindow employeeWindow = new EmployeeWindow(takeOrderWindow, addMenuItemWindow, reviewOrdersWindow, dailyStatisticsWindow, finishOrderWindow);
             MainWindow mainWindow = new MainWindow(employeeWindow, employeeService);

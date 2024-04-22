@@ -8,11 +8,13 @@ namespace RestaurantSystem.Windows
     {
         private readonly ITableService _tableService;
         private readonly IOrderService _orderService;
+        private readonly IEmployeeService _employeeService;
 
-        public TakeOrderWindow(ITableService tableService, IOrderService orderService)
+        public TakeOrderWindow(ITableService tableService, IOrderService orderService, IEmployeeService employeeService)
         {
             _tableService = tableService;
             _orderService = orderService;
+            _employeeService = employeeService;
         }
         public void Load(Employee employee)
         {
@@ -40,11 +42,8 @@ namespace RestaurantSystem.Windows
                 return;
             }
 
-            Console.WriteLine("Tables:");
-            foreach (Table table in tables)
-            {
-                Console.WriteLine(table);
-            }
+            PrintTables(tables);
+
             Console.Write("Enter the Id of the table at which you want customers to sit (or '0' to exit): ");
             string input = Console.ReadLine();
             bool isValidNumber = int.TryParse(input, out int tableId);
@@ -85,7 +84,29 @@ namespace RestaurantSystem.Windows
             Table selectedTable = tables.FirstOrDefault(t => t.Id == tableId);
             SaveTableOrder(employee, tables, numberOfPeople, tableId, selectedTable);
 
+            ConsoleHelper.ShowLoggedInAndClear(employee);
+            PrintTables(tables);
+
             ConsoleHelper.GoBack();
+        }
+
+        private void PrintTables(List<Table> tables)
+        {
+            List<Order> orders = _orderService.GetOrders();
+            Console.WriteLine("Tables:");
+            foreach (Table table in tables)
+            {
+                Order tableOrder = orders.FirstOrDefault(x => x.OrderId == table.ActiveOrderId);
+                if (tableOrder == null)
+                {
+                    Console.WriteLine(table);
+                }
+                else
+                {
+                    string employeeName = _employeeService.GetName(tableOrder.EmployeeId);
+                    Console.WriteLine($"{table}, Employee: {employeeName}");
+                }
+            }
         }
 
         private void SaveTableOrder(Employee employee, List<Table> tables, int numberOfPeople, int tableId, Table selectedTable)
@@ -104,13 +125,6 @@ namespace RestaurantSystem.Windows
             _orderService.AddOrder(order);
             selectedTable.Occupy(order);
             _tableService.SaveTables(tables);
-
-            Console.Clear();
-            Console.WriteLine("Tables:");
-            foreach (Table table in tables)
-            {
-                Console.WriteLine(table);
-            }
         }
     }
 }

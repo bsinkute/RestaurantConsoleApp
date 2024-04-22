@@ -15,6 +15,12 @@ namespace RestaurantSystem.Services
             _employeeDataService = employeeDataService;
         }
 
+        public string GetName(int id)
+        {
+            List<Employee> employees = _employeeDataService.ReadJson() ?? new List<Employee>();
+            return employees.FirstOrDefault(x => x.Id == id).Name;
+        }
+
         public Employee Authenticate (string password) 
         {
             List<Employee> employees = _employeeDataService.ReadJson() ?? new List<Employee>();

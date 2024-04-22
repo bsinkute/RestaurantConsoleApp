@@ -8,11 +8,13 @@ namespace RestaurantSystem.Windows
     {
         private readonly IStatisticService _statisticService;
         private readonly IOrderService _orderService;
+        private readonly IEmployeeService _employeeService;
 
-        public DailyStatisticsWindow(IStatisticService statisticService, IOrderService orderService)
+        public DailyStatisticsWindow(IStatisticService statisticService, IOrderService orderService, IEmployeeService employeeService)
         {
             _statisticService = statisticService;
             _orderService = orderService;
+            _employeeService = employeeService;
         }
         public void Load(Employee employee)
         {
@@ -39,7 +41,20 @@ namespace RestaurantSystem.Windows
             {
                 Console.WriteLine("No items added today.");
             }
+
+            Dictionary<int, int> employeeOrderCounts = _statisticService.GetEmployeeOrderCounts(dailyOrders);
+
+            foreach (var kvp in employeeOrderCounts)
+            {
+                string employeeName = _employeeService.GetName(kvp.Key);
+                int orderCount = kvp.Value;
+
+                Console.WriteLine($"Employee: {employeeName}, Order Count: {orderCount}");
+            }
+
             ConsoleHelper.GoBack();
+
+
         }
 
     }
