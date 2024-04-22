@@ -55,11 +55,11 @@ namespace RestaurantSystem.Windows
                 return;
             }
 
-            CloseOrder(orderToClose);
+            CloseOrder(orderToClose, employee);
             ConsoleHelper.GoBack();
         }
 
-        private void CloseOrder(Order orderToClose)
+        private void CloseOrder(Order orderToClose, Employee employee)
         {
             _orderService.Checkout(orderToClose);
             List<Table> tables = _tableService.GetTables();
@@ -74,6 +74,7 @@ namespace RestaurantSystem.Windows
                 Console.WriteLine($"Order ID {orderToClose.OrderId} successfully closed.");
                 Console.Write("Does the customer want a receipt? (yes/no): ");
                 bool userWantsReceipt = ConsoleHelper.YesOrNoInput();
+                ConsoleHelper.ShowLoggedInAndClear(employee);
                 PrintReceipts(orderToClose, userWantsReceipt);
             }
             else

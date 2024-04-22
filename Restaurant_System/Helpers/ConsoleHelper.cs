@@ -32,6 +32,7 @@ namespace RestaurantSystem.Helpers
         public static void ShowLoggedInAndClear(Employee employee)
         {
             Console.Clear();
+            Console.WriteLine("\x1b[3J");
             Console.WriteLine($"You are logged in as {employee.Name}");
             Console.WriteLine("-------------------------");
         }

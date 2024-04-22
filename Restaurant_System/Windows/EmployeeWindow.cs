@@ -54,6 +54,7 @@ namespace RestaurantSystem.Windows
                         break;
                     case 6:
                         Console.Clear();
+                        Console.WriteLine("\x1b[3J");
                         Console.WriteLine("You Loged Out.");
                         Console.WriteLine("Press any key.");
                         Console.ReadKey();

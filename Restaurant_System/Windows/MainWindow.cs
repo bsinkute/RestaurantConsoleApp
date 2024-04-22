@@ -37,6 +37,7 @@ namespace RestaurantSystem.Windows
         public void DisplayMenu()
         {
             Console.Clear();
+            Console.WriteLine("\x1b[3J");
             Console.WriteLine("Welcome to restaurant system!");
             Console.WriteLine("1. Login \r\n2. Exit");
             Console.Write("Enter number from 1 to 2: ");
@@ -45,6 +46,7 @@ namespace RestaurantSystem.Windows
         public void EmployeeLogin()
         {
             Console.Clear();
+            Console.WriteLine("\x1b[3J");
             Console.Write("Enter your password: ");
             Employee employee = _employeeService.Authenticate(ConsoleHelper.ReadMaskedInput());
             while (employee == null)
