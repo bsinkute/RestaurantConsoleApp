@@ -14,9 +14,9 @@ namespace RestaurantSystem.Windows
             _statisticService = statisticService;
             _orderService = orderService;
         }
-        public void Load()
+        public void Load(Employee employee)
         {
-            Console.Clear();
+            ConsoleHelper.ShowLoggedInAndClear(employee);
             List<Order> dailyOrders = _orderService.GetDayOrders(DateTime.Now);
             Console.WriteLine("Revenue: ");
             Console.WriteLine($"With VAT: {_statisticService.GetTotalRevenueWithVat(dailyOrders):N} €");
@@ -33,6 +33,11 @@ namespace RestaurantSystem.Windows
             foreach (var product in addedProducts)
             {
                 Console.WriteLine($"- Name: {product.Name}, Price: {product.Price:N} €");
+            }
+ 
+            if (addedProducts.Count == 0) 
+            {
+                Console.WriteLine("No items added today.");
             }
             ConsoleHelper.GoBack();
         }

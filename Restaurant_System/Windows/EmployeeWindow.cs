@@ -1,4 +1,5 @@
-﻿using RestaurantSystem.Models;
+﻿using RestaurantSystem.Helpers;
+using RestaurantSystem.Models;
 
 namespace RestaurantSystem.Windows
 {
@@ -40,7 +41,7 @@ namespace RestaurantSystem.Windows
                         _takeOrderWindow.Load(employee);
                         break;
                     case 2:
-                        _addMenuItemWindow.Load();
+                        _addMenuItemWindow.Load(employee);
                         break;
                     case 3:
                         _reviewOrdersWindow.Load(employee);
@@ -49,7 +50,7 @@ namespace RestaurantSystem.Windows
                         _finishOrderWindow.Load(employee);
                         break;
                     case 5:
-                        _dailyStatisticsWindow.Load();
+                        _dailyStatisticsWindow.Load(employee);
                         break;
                     case 6:
                         Console.Clear();
@@ -65,8 +66,7 @@ namespace RestaurantSystem.Windows
 
         public void DisplayMenu(Employee employee)
         {
-            Console.Clear();
-            Console.WriteLine($"Welcome {employee.Name}!");
+            ConsoleHelper.ShowLoggedInAndClear(employee);
             Console.WriteLine("1. Take order \r\n2. Add new menu item \r\n3. Review exsisting orders \r\n4. Finish order \r\n5. Daily statistics \r\n6. Logout");
             Console.Write("Enter number from 1 to 6: ");
         }

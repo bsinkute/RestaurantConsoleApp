@@ -12,9 +12,9 @@ namespace RestaurantSystem.Windows
             _menuService = menuService;
         }
 
-        public void Load()
+        public void Load(Employee employee)
         {
-            Console.Clear();
+            ConsoleHelper.ShowLoggedInAndClear(employee);
             Console.WriteLine("Menu:");
             foreach (MenuItem menuItem in _menuService.GetMenu().Items)
             {
@@ -47,7 +47,7 @@ namespace RestaurantSystem.Windows
                 }
             }
 
-            Console.Clear();
+            ConsoleHelper.ShowLoggedInAndClear(employee);
             Console.WriteLine("Updated menu:");
             foreach (MenuItem menuItem in _menuService.GetMenu().Items)
             {

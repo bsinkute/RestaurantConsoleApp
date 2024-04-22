@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using RestaurantSystem.Models;
+using System.Text;
 
 namespace RestaurantSystem.Helpers
 {
@@ -26,6 +27,13 @@ namespace RestaurantSystem.Helpers
         {
             Console.Write("Press any key to go back to employee menu. ");
             Console.ReadKey();
+        }
+
+        public static void ShowLoggedInAndClear(Employee employee)
+        {
+            Console.Clear();
+            Console.WriteLine($"You are logged in as {employee.Name}");
+            Console.WriteLine("-------------------------");
         }
 
         public static string ReadMaskedInput()

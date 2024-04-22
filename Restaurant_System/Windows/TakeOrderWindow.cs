@@ -17,7 +17,7 @@ namespace RestaurantSystem.Windows
         public void Load(Employee employee)
         {
             List<Table> tables = _tableService.GetTables();
-            Console.Clear();
+            ConsoleHelper.ShowLoggedInAndClear(employee);
             Console.Write("How many guests should be seated? (or '0' to exit): ");
             bool isCorectNumber = int.TryParse(Console.ReadLine(), out int numberOfPeople);
             bool haveFittingTables = tables.Any(table => table.NumberOfSeats >= numberOfPeople && table.IsFree());

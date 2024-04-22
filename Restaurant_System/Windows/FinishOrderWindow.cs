@@ -19,7 +19,7 @@ namespace RestaurantSystem.Windows
 
         public void Load(Employee employee)
         {
-            Console.Clear();
+            ConsoleHelper.ShowLoggedInAndClear(employee);
             List<Order> activeOrders = _orderService.GetEmployeeOrders(employee.Id);
 
             if (!activeOrders.Any())
