@@ -16,10 +16,5 @@
             ContactNumber = contactNumber;
             EmployeeId = employeeId;
         }
-
-        public override string ToString()
-        {
-            return $"Reservation Date and Time: {ReservationDateTime}, People: {NumberOfPeople}, Customer: {CustomerName}, Contact: {ContactNumber}";
-        }
     }
 }

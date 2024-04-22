@@ -63,48 +63,40 @@ namespace RestaurantSystem.Infrastructure
             catch (FileNotFoundException)
             {
                 Console.WriteLine("File was not found. Returning default value.");
-                return default;
             }
             catch (JsonException)
             {
                 Console.WriteLine("Invalid JSON. Returning default value.");
-                return default;
             }
             catch (NotSupportedException)
             {
                 Console.WriteLine("Could not deserialize data. Returning default value.");
-                return default;
             }
             catch (ArgumentException)
             {
                 Console.WriteLine("Invalid argument. Returning default value.");
-                return default;
             }
             catch (PathTooLongException)
             {
                 Console.WriteLine("File name too long. Returning default value.");
-                return default;
             }
             catch (DirectoryNotFoundException)
             {
                 Console.WriteLine("Directory not found. Returning default value.");
-                return default;
             }
             catch (IOException)
             {
                 Console.WriteLine("IO Error occurred. Returning default value.");
-                return default;
             }
             catch (UnauthorizedAccessException)
             {
                 Console.WriteLine("Unauthorized access to file. Returning default value.");
-                return default;
             }
             catch (SecurityException)
             {
                 Console.WriteLine("Security error. Returning default value.");
-                return default;
             }
+            return default;
         }
     }
 }
