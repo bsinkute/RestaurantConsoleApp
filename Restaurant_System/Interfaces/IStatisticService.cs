@@ -10,5 +10,6 @@ namespace RestaurantSystem.Interfaces
         int GetTotalCustomers(List<Order> orders);
         int GetTotalSeats(List<Order> orders);
         List<MenuItem> GetAddedProduct(DateTime date);
+        Dictionary<int, int> GetEmployeeOrderCounts(List<Order> orders);
     }
 }

@@ -8,15 +8,17 @@ namespace RestaurantSystem.Windows
     {
         private readonly IStatisticService _statisticService;
         private readonly IOrderService _orderService;
+        private readonly IEmployeeService _employeeService;
 
-        public DailyStatisticsWindow(IStatisticService statisticService, IOrderService orderService)
+        public DailyStatisticsWindow(IStatisticService statisticService, IOrderService orderService, IEmployeeService employeeService)
         {
             _statisticService = statisticService;
             _orderService = orderService;
+            _employeeService = employeeService;
         }
-        public void Load()
+        public void Load(Employee employee)
         {
-            Console.Clear();
+            ConsoleHelper.ShowLoggedInAndClear(employee);
             List<Order> dailyOrders = _orderService.GetDayOrders(DateTime.Now);
             Console.WriteLine("Revenue: ");
             Console.WriteLine($"With VAT: {_statisticService.GetTotalRevenueWithVat(dailyOrders):N} €");
@@ -34,7 +36,25 @@ namespace RestaurantSystem.Windows
             {
                 Console.WriteLine($"- Name: {product.Name}, Price: {product.Price:N} €");
             }
+ 
+            if (addedProducts.Count == 0) 
+            {
+                Console.WriteLine("No items added today.");
+            }
+
+            Dictionary<int, int> employeeOrderCounts = _statisticService.GetEmployeeOrderCounts(dailyOrders);
+
+            foreach (var kvp in employeeOrderCounts)
+            {
+                string employeeName = _employeeService.GetName(kvp.Key);
+                int orderCount = kvp.Value;
+
+                Console.WriteLine($"Employee: {employeeName}, Order Count: {orderCount}");
+            }
+
             ConsoleHelper.GoBack();
+
+
         }
 
     }

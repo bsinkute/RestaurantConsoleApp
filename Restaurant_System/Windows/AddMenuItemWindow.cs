@@ -12,9 +12,9 @@ namespace RestaurantSystem.Windows
             _menuService = menuService;
         }
 
-        public void Load()
+        public void Load(Employee employee)
         {
-            Console.Clear();
+            ConsoleHelper.ShowLoggedInAndClear(employee);
             Console.WriteLine("Menu:");
             foreach (MenuItem menuItem in _menuService.GetMenu().Items)
             {
@@ -25,20 +25,20 @@ namespace RestaurantSystem.Windows
                 Console.WriteLine("Add new menu item:");
                 Console.Write("Type '1' for Dish or '2' for Drink (or '0' to cancel): ");
 
-                bool isChoiseCorrect = int.TryParse(Console.ReadLine(), out int choise);
-                while (!isChoiseCorrect || choise < 0 || choise > 2)
+                bool isChoiceCorrect = int.TryParse(Console.ReadLine(), out int choice);
+                while (!isChoiceCorrect || choice < 0 || choice > 2)
                 {
                     Console.Write("Invalid type selection. Please try again: ");
-                    isChoiseCorrect = int.TryParse(Console.ReadLine(), out choise);
+                    isChoiceCorrect = int.TryParse(Console.ReadLine(), out choice);
                 }
 
-                if (choise == 0)
+                if (choice == 0)
                 {
                     ConsoleHelper.GoBack();
                     return;
                 }
 
-                CreateNewItem(choise);
+                CreateNewItem(choice);
 
                 Console.Write("Do you want to add another item? (yes/no): ");
                 if (!ConsoleHelper.YesOrNoInput())
@@ -47,7 +47,7 @@ namespace RestaurantSystem.Windows
                 }
             }
 
-            Console.Clear();
+            ConsoleHelper.ShowLoggedInAndClear(employee);
             Console.WriteLine("Updated menu:");
             foreach (MenuItem menuItem in _menuService.GetMenu().Items)
             {

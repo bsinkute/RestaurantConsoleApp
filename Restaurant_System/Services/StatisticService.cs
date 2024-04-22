@@ -66,5 +66,21 @@ namespace RestaurantSystem.Services
             return _menuService.GetMenu().Items.Where(item => item.AddedDate.Date == date.Date)
                 .ToList();
         }
+
+        public Dictionary<int, int> GetEmployeeOrderCounts(List<Order> orders)
+        {
+            Dictionary<int, int> employeeOrderCounts = new Dictionary<int, int>();
+
+            var query = orders
+                .GroupBy(o => o.EmployeeId)
+                .Select(x => new { EmployeeId = x.Key, OrderCount = x.Count() });
+
+            foreach (var result in query)
+            {
+                employeeOrderCounts[result.EmployeeId] = result.OrderCount;
+            }
+
+            return employeeOrderCounts;
+        }
     }
 }

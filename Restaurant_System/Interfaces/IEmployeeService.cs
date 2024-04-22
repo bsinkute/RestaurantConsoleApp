@@ -4,6 +4,7 @@ namespace RestaurantSystem.Interfaces
 {
     public interface IEmployeeService
     {
-        List<Employee> GetEmployees();
+        string GetName(int id);
+        Employee Authenticate(string password);
     }
 }

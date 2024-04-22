@@ -4,16 +4,13 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Password { get; set; }
 
-        public Employee(int id, string name)
+        public Employee(int id, string name, string password)
         {
             Id = id;
             Name = name;
-        }
-
-        public override string ToString()
-        {
-            return $"Id: {Id}, Name: {Name}";
+            Password = password;
         }
     }
 }
