@@ -123,7 +123,7 @@ namespace RestaurantSystem.Windows
                 Console.WriteLine("Invalid input.");
             }
 
-            Console.WriteLine("Do you want to add another item? (yes/no): ");
+            Console.Write("Do you want to add another item? (yes/no): ");
             bool addAnotherInput = ConsoleHelper.YesOrNoInput();
             if(addAnotherInput)
             {
